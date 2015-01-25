@@ -12,19 +12,21 @@ def MatrixPerturb(matrix, p):
     replaces = np.random.choice(2,[1,50],p=[1-p,p])
     return matrix-np.multiply(matrix,replaces)+np.multiply(replaces,np.random.random(np.shape(matrix)))
 
-def Fitness(matrix):
+def Fitness(matrix,match=[]):
     # function for core01
     return np.mean(matrix)
+    # function for core03, rmse
+    # return np.sqrt(np.mean((matrix-match)**2))
 
 def Evolve(parent,runtime):
     fit = np.zeros(runtime)
-    genes = np.zeros([np.shape(parent)[1],runtime])
+    genes = np.zeros([np.shape(parent)[0],np.shape(parent)[1],runtime])
     for currentGeneration in range(runtime):
         parentFitness = Fitness(parent)
         fit[currentGeneration] = parentFitness
-        genes[:,currentGeneration] = parent[0]
+        genes[:,:,currentGeneration] = parent
         child = MatrixPerturb(parent, .05) 
-        childFitness = Fitness(child) 
+        childFitness = Fitness(child)
         if childFitness > parentFitness:
             parent = child
             parentFitness = childFitness
@@ -64,7 +66,7 @@ if __name__ == '__main__':
     parent = MatrixCreate(1, 50) 
     parent = MatrixRandomize(parent) 
     fit,genes = Evolve(parent,runtime)
-    plt.imshow(genes, cmap=plt.cm.gray, aspect='auto', interpolation='nearest')
+    plt.imshow(genes[0,:,:], cmap=plt.cm.gray, aspect='auto', interpolation='nearest')
     plt.xlabel("Generation")
     plt.ylabel("Gene")
     plt.savefig("figure03.png")
