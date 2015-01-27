@@ -1,0 +1,551 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		080F2DFA7E9B1A3512754015 /* FeatherstoneMultiBodyDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1502631F1C0D593E1F6E1C9D /* FeatherstoneMultiBodyDemo.cpp */; };
+		01AD16B350A875675ACE1D24 /* Win32FeatherstoneMultiBodyDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AAE272929BA7E8A34C63B44 /* Win32FeatherstoneMultiBodyDemo.cpp */; };
+		49E1142C6468180069354437 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A7B60C80EC95BB20E3960A4 /* main.cpp */; };
+		389E396951EF5F4C242304BF /* libOpenGLSupport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C840CB2325E78FA05EA7815 /* libOpenGLSupport.a */; };
+		413F4ED87FD72D561AB66445 /* libBulletDynamics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AFE2E434DD4280116ED4B01 /* libBulletDynamics.a */; };
+		458D58542D54796652F0178F /* libBulletCollision.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A147A7204D1595E44393103 /* libBulletCollision.a */; };
+		541A17542A93301F63B91703 /* libLinearMath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F36C9F51AB568E2B7A636A /* libLinearMath.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		109C20AB6B6B6AB006851932 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D565BAC1E4025B750AC6544 /* OpenGLSupport.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 13317A93699D459A10297A0A;
+			remoteInfo = "libOpenGLSupport_xcode4.a";
+		};
+		633568F368F00A3216DD2DC8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D565BAC1E4025B750AC6544 /* OpenGLSupport.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2BBB262E38DF786F4DC625BD;
+			remoteInfo = "libOpenGLSupport_xcode4.a";
+		};
+		096358A004070C2F7EDA53C9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 550A1CFC037B29F453F92E87 /* BulletDynamics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1156659A68D23ABE3AED3114;
+			remoteInfo = "libBulletDynamics_xcode4.a";
+		};
+		3E9A71B8071D1DB75CF359AC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 550A1CFC037B29F453F92E87 /* BulletDynamics.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3EF957417634761E309476CC;
+			remoteInfo = "libBulletDynamics_xcode4.a";
+		};
+		19500B7C7B5D283B54330DED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05695FD13DE52B3067ED0351 /* BulletCollision.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 23A405C00880385E3AB42230;
+			remoteInfo = "libBulletCollision_xcode4.a";
+		};
+		58C31EC6131A16E86C9D667C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05695FD13DE52B3067ED0351 /* BulletCollision.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 266F63D6211F36CE4AC24022;
+			remoteInfo = "libBulletCollision_xcode4.a";
+		};
+		64CB6E220F6A7A166DC52242 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 58CE496C7F8D2DE33D135219 /* LinearMath.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0D9C222675E459C34B0C17AB;
+			remoteInfo = "libLinearMath_xcode4.a";
+		};
+		3A561E37620D5E370AA36F3F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 58CE496C7F8D2DE33D135219 /* LinearMath.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 700C4C731EEF63FB0C4B4CA9;
+			remoteInfo = "libLinearMath_xcode4.a";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1502631F1C0D593E1F6E1C9D /* FeatherstoneMultiBodyDemo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "FeatherstoneMultiBodyDemo.cpp"; path = "../../Demos/FeatherstoneMultiBodyDemo/FeatherstoneMultiBodyDemo.cpp"; sourceTree = "<group>"; };
+		4FBB0FB01A703BA629C55410 /* FeatherstoneMultiBodyDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "FeatherstoneMultiBodyDemo.h"; path = "../../Demos/FeatherstoneMultiBodyDemo/FeatherstoneMultiBodyDemo.h"; sourceTree = "<group>"; };
+		1AAE272929BA7E8A34C63B44 /* Win32FeatherstoneMultiBodyDemo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "Win32FeatherstoneMultiBodyDemo.cpp"; path = "../../Demos/FeatherstoneMultiBodyDemo/Win32FeatherstoneMultiBodyDemo.cpp"; sourceTree = "<group>"; };
+		4A7B60C80EC95BB20E3960A4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "main.cpp"; path = "../../Demos/FeatherstoneMultiBodyDemo/main.cpp"; sourceTree = "<group>"; };
+		2B30006D278206F40A447EE9 /* App_FeatherstoneMultiBodyDemo_xcode4 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "App_FeatherstoneMultiBodyDemo_xcode4"; path = "App_FeatherstoneMultiBodyDemo_xcode4"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D565BAC1E4025B750AC6544 /* OpenGLSupport.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "OpenGLSupport.xcodeproj"; path = "OpenGLSupport.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		550A1CFC037B29F453F92E87 /* BulletDynamics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "BulletDynamics.xcodeproj"; path = "BulletDynamics.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		05695FD13DE52B3067ED0351 /* BulletCollision.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "BulletCollision.xcodeproj"; path = "BulletCollision.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		58CE496C7F8D2DE33D135219 /* LinearMath.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "LinearMath.xcodeproj"; path = "LinearMath.xcodeproj"; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3B7503E5517305BB5A011444 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				389E396951EF5F4C242304BF /* libOpenGLSupport.a in Frameworks */,
+				413F4ED87FD72D561AB66445 /* libBulletDynamics.a in Frameworks */,
+				458D58542D54796652F0178F /* libBulletCollision.a in Frameworks */,
+				541A17542A93301F63B91703 /* libLinearMath.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		184F08F664D0416306683CB2 /* App_FeatherstoneMultiBodyDemo */ = {
+			isa = PBXGroup;
+			children = (
+				024D47390A1D10B6592E6E21 /* Demos */,
+				19DB2A9536753C336A6062D6 /* Products */,
+				67B1418D20C9764C21CC68C2 /* Projects */,
+			);
+			name = "App_FeatherstoneMultiBodyDemo";
+			sourceTree = "<group>";
+		};
+		024D47390A1D10B6592E6E21 /* Demos */ = {
+			isa = PBXGroup;
+			children = (
+				40BD61F0131951B00E883F67 /* FeatherstoneMultiBodyDemo */,
+			);
+			name = "Demos";
+			sourceTree = "<group>";
+		};
+		40BD61F0131951B00E883F67 /* FeatherstoneMultiBodyDemo */ = {
+			isa = PBXGroup;
+			children = (
+				1502631F1C0D593E1F6E1C9D /* FeatherstoneMultiBodyDemo.cpp */,
+				4FBB0FB01A703BA629C55410 /* FeatherstoneMultiBodyDemo.h */,
+				1AAE272929BA7E8A34C63B44 /* Win32FeatherstoneMultiBodyDemo.cpp */,
+				4A7B60C80EC95BB20E3960A4 /* main.cpp */,
+			);
+			name = "FeatherstoneMultiBodyDemo";
+			sourceTree = "<group>";
+		};
+		19DB2A9536753C336A6062D6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2B30006D278206F40A447EE9 /* App_FeatherstoneMultiBodyDemo_xcode4 */,
+			);
+			name = "Products";
+			sourceTree = "<group>";
+		};
+		67B1418D20C9764C21CC68C2 /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				4D565BAC1E4025B750AC6544 /* OpenGLSupport.xcodeproj */,
+				550A1CFC037B29F453F92E87 /* BulletDynamics.xcodeproj */,
+				05695FD13DE52B3067ED0351 /* BulletCollision.xcodeproj */,
+				58CE496C7F8D2DE33D135219 /* LinearMath.xcodeproj */,
+			);
+			name = "Projects";
+			sourceTree = "<group>";
+		};
+		041B0F8575F2150524921BF3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5C840CB2325E78FA05EA7815 /* libOpenGLSupport.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6F615BCE48435F3262F96571 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2AFE2E434DD4280116ED4B01 /* libBulletDynamics.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		75AA073D3EA16ACA7E83651A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5A147A7204D1595E44393103 /* libBulletCollision.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4D3968CC4A984B0B78283E2E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				14F36C9F51AB568E2B7A636A /* libLinearMath.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1C4719405E153A222BFC3739 /* App_FeatherstoneMultiBodyDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4FE16D647B04617170C92AA6 /* Build configuration list for PBXNativeTarget "App_FeatherstoneMultiBodyDemo" */;
+			buildPhases = (
+				1EB4413A07780DBB280E51C5 /* Resources */,
+				0E98233266D071B755906C6A /* Sources */,
+				3B7503E5517305BB5A011444 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2AEF55EC7C6B651777BC0C63 /* PBXTargetDependency */,
+				37AD522C5BE942E76B2E3B65 /* PBXTargetDependency */,
+				06DE6E01362825610A8071A9 /* PBXTargetDependency */,
+				194E08D10C38390045C85701 /* PBXTargetDependency */,
+			);
+			name = "App_FeatherstoneMultiBodyDemo";
+			productInstallPath = "$(HOME)/bin";
+			productName = "App_FeatherstoneMultiBodyDemo";
+			productReference = 2B30006D278206F40A447EE9 /* App_FeatherstoneMultiBodyDemo_xcode4 */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "App_FeatherstoneMultiBodyDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 1;
+			mainGroup = 184F08F664D0416306683CB2 /* App_FeatherstoneMultiBodyDemo */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 041B0F8575F2150524921BF3 /* Products */;
+					ProjectRef = 4D565BAC1E4025B750AC6544 /* OpenGLSupport.xcodeproj */;
+				},
+				{
+					ProductGroup = 6F615BCE48435F3262F96571 /* Products */;
+					ProjectRef = 550A1CFC037B29F453F92E87 /* BulletDynamics.xcodeproj */;
+				},
+				{
+					ProductGroup = 75AA073D3EA16ACA7E83651A /* Products */;
+					ProjectRef = 05695FD13DE52B3067ED0351 /* BulletCollision.xcodeproj */;
+				},
+				{
+					ProductGroup = 4D3968CC4A984B0B78283E2E /* Products */;
+					ProjectRef = 58CE496C7F8D2DE33D135219 /* LinearMath.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				1C4719405E153A222BFC3739 /* App_FeatherstoneMultiBodyDemo_xcode4 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		5C840CB2325E78FA05EA7815 /* libOpenGLSupport.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "../../lib/libOpenGLSupport.a";
+			remoteRef = 109C20AB6B6B6AB006851932 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2AFE2E434DD4280116ED4B01 /* libBulletDynamics.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "../../lib/libBulletDynamics.a";
+			remoteRef = 096358A004070C2F7EDA53C9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5A147A7204D1595E44393103 /* libBulletCollision.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "../../lib/libBulletCollision.a";
+			remoteRef = 19500B7C7B5D283B54330DED /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		14F36C9F51AB568E2B7A636A /* libLinearMath.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "../../lib/libLinearMath.a";
+			remoteRef = 64CB6E220F6A7A166DC52242 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1EB4413A07780DBB280E51C5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0E98233266D071B755906C6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				080F2DFA7E9B1A3512754015 /* FeatherstoneMultiBodyDemo.cpp in Sources */,
+				01AD16B350A875675ACE1D24 /* Win32FeatherstoneMultiBodyDemo.cpp in Sources */,
+				49E1142C6468180069354437 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+/* End PBXVariantGroup section */
+
+/* Begin PBXTargetDependency section */
+		2AEF55EC7C6B651777BC0C63 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libOpenGLSupport.a";
+			targetProxy = 633568F368F00A3216DD2DC8 /* PBXContainerItemProxy */;
+		};
+		37AD522C5BE942E76B2E3B65 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libBulletDynamics.a";
+			targetProxy = 3E9A71B8071D1DB75CF359AC /* PBXContainerItemProxy */;
+		};
+		06DE6E01362825610A8071A9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libBulletCollision.a";
+			targetProxy = 58C31EC6131A16E86C9D667C /* PBXContainerItemProxy */;
+		};
+		194E08D10C38390045C85701 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libLinearMath.a";
+			targetProxy = 3A561E37620D5E370AA36F3F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1BD8225B3F5639EF3A7F19D6 /* Release Native 32-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT) $(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				VALID_ARCHS = "x86_64 i386";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				CONFIGURATION_BUILD_DIR = "../..";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "App_FeatherstoneMultiBodyDemo_xcode4";
+			};
+			name = "Release Native 32-bit";
+		};
+		2C5510ED58FB4B6501491C48 /* Release Native 64-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT) $(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				VALID_ARCHS = "x86_64 i386";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				CONFIGURATION_BUILD_DIR = "../..";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "App_FeatherstoneMultiBodyDemo_xcode4_x64_release";
+			};
+			name = "Release Native 64-bit";
+		};
+		2BE02397322E17C72AFB64A0 /* Debug Native 32-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT) $(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				VALID_ARCHS = "x86_64 i386";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "../..";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "App_FeatherstoneMultiBodyDemo_xcode4_debug";
+			};
+			name = "Debug Native 32-bit";
+		};
+		0DE5496D1C7E3E1B751C0598 /* Debug Native 64-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT) $(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				VALID_ARCHS = "x86_64 i386";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "../..";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "App_FeatherstoneMultiBodyDemo_xcode4_x64_debug";
+			};
+			name = "Debug Native 64-bit";
+		};
+		4E4050E2347E6BBF0A2B194D /* Release Native 32-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT) $(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				VALID_ARCHS = "x86_64 i386";
+				SDKROOT = macosx;
+				ARCHS = "i386";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../src",
+					"../../Demos/OpenGL",
+				);
+				OBJROOT = "obj/x32/Release/App_FeatherstoneMultiBodyDemo";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+				);
+				OTHER_LDFLAGS = (
+					"-framework Carbon -framework OpenGL -framework AGL -framework Glut",
+				);
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../..";
+			};
+			name = "Release Native 32-bit";
+		};
+		628C7AED6A1532EC34B9785B /* Release Native 64-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT) $(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				VALID_ARCHS = "x86_64 i386";
+				SDKROOT = macosx;
+				ARCHS = "x86_64";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../src",
+					"../../Demos/OpenGL",
+				);
+				OBJROOT = "obj/x64/Release/App_FeatherstoneMultiBodyDemo";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+				);
+				OTHER_LDFLAGS = (
+					"-framework Carbon -framework OpenGL -framework AGL -framework Glut",
+				);
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../..";
+			};
+			name = "Release Native 64-bit";
+		};
+		574D09620A50192433CE3CE1 /* Debug Native 32-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT) $(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				VALID_ARCHS = "x86_64 i386";
+				SDKROOT = macosx;
+				ARCHS = "i386";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../src",
+					"../../Demos/OpenGL",
+				);
+				OBJROOT = "obj/x32/Debug/App_FeatherstoneMultiBodyDemo";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+				);
+				OTHER_LDFLAGS = (
+					"-framework Carbon -framework OpenGL -framework AGL -framework Glut",
+				);
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../..";
+			};
+			name = "Debug Native 32-bit";
+		};
+		67924A2D60E509F81B3E06F8 /* Debug Native 64-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT) $(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				VALID_ARCHS = "x86_64 i386";
+				SDKROOT = macosx;
+				ARCHS = "x86_64";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../src",
+					"../../Demos/OpenGL",
+				);
+				OBJROOT = "obj/x64/Debug/App_FeatherstoneMultiBodyDemo";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+				);
+				OTHER_LDFLAGS = (
+					"-framework Carbon -framework OpenGL -framework AGL -framework Glut",
+				);
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../..";
+			};
+			name = "Debug Native 64-bit";
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4FE16D647B04617170C92AA6 /* Build configuration list for PBXNativeTarget "App_FeatherstoneMultiBodyDemo_xcode4" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BD8225B3F5639EF3A7F19D6 /* Release Native 32-bit */,
+				2C5510ED58FB4B6501491C48 /* Release Native 64-bit */,
+				2BE02397322E17C72AFB64A0 /* Debug Native 32-bit */,
+				0DE5496D1C7E3E1B751C0598 /* Debug Native 64-bit */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Release Native 32-bit";
+		};
+		1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "App_FeatherstoneMultiBodyDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E4050E2347E6BBF0A2B194D /* Release Native 32-bit */,
+				628C7AED6A1532EC34B9785B /* Release Native 64-bit */,
+				574D09620A50192433CE3CE1 /* Debug Native 32-bit */,
+				67924A2D60E509F81B3E06F8 /* Debug Native 64-bit */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Release Native 32-bit";
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}

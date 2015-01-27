@@ -1,0 +1,551 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		774E5C38087B591175952C95 /* VoronoiFractureDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 19D642CD35832D1E31AC4EC7 /* VoronoiFractureDemo.cpp */; };
+		610257E92A650D8A1AF22E9A /* Win32VoronoiFractureDemo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7B92559933D62E605FA4415F /* Win32VoronoiFractureDemo.cpp */; };
+		7DD201FF290517447E6806B6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 227F7B261654747407C67C4E /* main.cpp */; };
+		77322F74692D41E2783A58A5 /* libOpenGLSupport.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D407ADD7DE764CB70CF4B71 /* libOpenGLSupport.a */; };
+		04450DAA1C22127841D60430 /* libBulletDynamics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 25BC73B97ED56136473F31EE /* libBulletDynamics.a */; };
+		5FE3371A27DD37FA27657A5B /* libBulletCollision.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74CF7828272F1A5E17A22C8B /* libBulletCollision.a */; };
+		7B4579966EFC6BA534885B8F /* libLinearMath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 452069AD7EB9613721881DDA /* libLinearMath.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		13081150239D2E0F0D58342C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 47DF0C257CE2731854F25FCD /* OpenGLSupport.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 13317A93699D459A10297A0A;
+			remoteInfo = "libOpenGLSupport_xcode4.a";
+		};
+		55831B875AF25735629756BB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 47DF0C257CE2731854F25FCD /* OpenGLSupport.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2BBB262E38DF786F4DC625BD;
+			remoteInfo = "libOpenGLSupport_xcode4.a";
+		};
+		319D41231C803DDE5BF07648 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 68744A904B170A0434433C6F /* BulletDynamics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1156659A68D23ABE3AED3114;
+			remoteInfo = "libBulletDynamics_xcode4.a";
+		};
+		1B2F4A7B77C87AE373A16682 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 68744A904B170A0434433C6F /* BulletDynamics.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3EF957417634761E309476CC;
+			remoteInfo = "libBulletDynamics_xcode4.a";
+		};
+		028645C47BFC68FD489A1892 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E2D7BED34900B24123A5F05 /* BulletCollision.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 23A405C00880385E3AB42230;
+			remoteInfo = "libBulletCollision_xcode4.a";
+		};
+		45A8485902013BCD4FF426A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E2D7BED34900B24123A5F05 /* BulletCollision.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 266F63D6211F36CE4AC24022;
+			remoteInfo = "libBulletCollision_xcode4.a";
+		};
+		472506E4082F490572123074 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07FB2E311D4347B966DC261F /* LinearMath.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0D9C222675E459C34B0C17AB;
+			remoteInfo = "libLinearMath_xcode4.a";
+		};
+		377838981E515EDC3FF578F5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07FB2E311D4347B966DC261F /* LinearMath.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 700C4C731EEF63FB0C4B4CA9;
+			remoteInfo = "libLinearMath_xcode4.a";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		19D642CD35832D1E31AC4EC7 /* VoronoiFractureDemo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "VoronoiFractureDemo.cpp"; path = "../../Demos/VoronoiFractureDemo/VoronoiFractureDemo.cpp"; sourceTree = "<group>"; };
+		2A533FBC6F656F427DF44224 /* VoronoiFractureDemo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "VoronoiFractureDemo.h"; path = "../../Demos/VoronoiFractureDemo/VoronoiFractureDemo.h"; sourceTree = "<group>"; };
+		7B92559933D62E605FA4415F /* Win32VoronoiFractureDemo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "Win32VoronoiFractureDemo.cpp"; path = "../../Demos/VoronoiFractureDemo/Win32VoronoiFractureDemo.cpp"; sourceTree = "<group>"; };
+		227F7B261654747407C67C4E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "main.cpp"; path = "../../Demos/VoronoiFractureDemo/main.cpp"; sourceTree = "<group>"; };
+		5BA9687161DD2A7025E36E63 /* App_VoronoiFractureDemo_xcode4 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "App_VoronoiFractureDemo_xcode4"; path = "App_VoronoiFractureDemo_xcode4"; sourceTree = BUILT_PRODUCTS_DIR; };
+		47DF0C257CE2731854F25FCD /* OpenGLSupport.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "OpenGLSupport.xcodeproj"; path = "OpenGLSupport.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		68744A904B170A0434433C6F /* BulletDynamics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "BulletDynamics.xcodeproj"; path = "BulletDynamics.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		6E2D7BED34900B24123A5F05 /* BulletCollision.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "BulletCollision.xcodeproj"; path = "BulletCollision.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		07FB2E311D4347B966DC261F /* LinearMath.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "LinearMath.xcodeproj"; path = "LinearMath.xcodeproj"; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		32F6675715D82E6C3BF632B5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77322F74692D41E2783A58A5 /* libOpenGLSupport.a in Frameworks */,
+				04450DAA1C22127841D60430 /* libBulletDynamics.a in Frameworks */,
+				5FE3371A27DD37FA27657A5B /* libBulletCollision.a in Frameworks */,
+				7B4579966EFC6BA534885B8F /* libLinearMath.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		31043D33631B28FB2F2415C8 /* App_VoronoiFractureDemo */ = {
+			isa = PBXGroup;
+			children = (
+				2D8235D20D150AAE3C235507 /* Demos */,
+				3C213C0862A82F0041467B69 /* Products */,
+				64844CD6790C2B1F284F61E2 /* Projects */,
+			);
+			name = "App_VoronoiFractureDemo";
+			sourceTree = "<group>";
+		};
+		2D8235D20D150AAE3C235507 /* Demos */ = {
+			isa = PBXGroup;
+			children = (
+				4EE556E3778F633271CE3296 /* VoronoiFractureDemo */,
+			);
+			name = "Demos";
+			sourceTree = "<group>";
+		};
+		4EE556E3778F633271CE3296 /* VoronoiFractureDemo */ = {
+			isa = PBXGroup;
+			children = (
+				19D642CD35832D1E31AC4EC7 /* VoronoiFractureDemo.cpp */,
+				2A533FBC6F656F427DF44224 /* VoronoiFractureDemo.h */,
+				7B92559933D62E605FA4415F /* Win32VoronoiFractureDemo.cpp */,
+				227F7B261654747407C67C4E /* main.cpp */,
+			);
+			name = "VoronoiFractureDemo";
+			sourceTree = "<group>";
+		};
+		3C213C0862A82F0041467B69 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5BA9687161DD2A7025E36E63 /* App_VoronoiFractureDemo_xcode4 */,
+			);
+			name = "Products";
+			sourceTree = "<group>";
+		};
+		64844CD6790C2B1F284F61E2 /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				47DF0C257CE2731854F25FCD /* OpenGLSupport.xcodeproj */,
+				68744A904B170A0434433C6F /* BulletDynamics.xcodeproj */,
+				6E2D7BED34900B24123A5F05 /* BulletCollision.xcodeproj */,
+				07FB2E311D4347B966DC261F /* LinearMath.xcodeproj */,
+			);
+			name = "Projects";
+			sourceTree = "<group>";
+		};
+		02AD38EC2BC07235194101B3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D407ADD7DE764CB70CF4B71 /* libOpenGLSupport.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4482575C639222D90717331B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				25BC73B97ED56136473F31EE /* libBulletDynamics.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7CA07B46514A10E46BD85813 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				74CF7828272F1A5E17A22C8B /* libBulletCollision.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		73F90598484A27F17D8B5D1F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				452069AD7EB9613721881DDA /* libLinearMath.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		51342E1B129C73373269356A /* App_VoronoiFractureDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3984152D44883E69727646E3 /* Build configuration list for PBXNativeTarget "App_VoronoiFractureDemo" */;
+			buildPhases = (
+				123B1596527A00A442944098 /* Resources */,
+				5616691C6A6A03610CA534BC /* Sources */,
+				32F6675715D82E6C3BF632B5 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				50A132DC3070224237EE71A0 /* PBXTargetDependency */,
+				033B389A1A9C148F3CB9402F /* PBXTargetDependency */,
+				26F554071F5677D22BA55E46 /* PBXTargetDependency */,
+				34A969164F8955E568FF4D05 /* PBXTargetDependency */,
+			);
+			name = "App_VoronoiFractureDemo";
+			productInstallPath = "$(HOME)/bin";
+			productName = "App_VoronoiFractureDemo";
+			productReference = 5BA9687161DD2A7025E36E63 /* App_VoronoiFractureDemo_xcode4 */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "App_VoronoiFractureDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 1;
+			mainGroup = 31043D33631B28FB2F2415C8 /* App_VoronoiFractureDemo */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 02AD38EC2BC07235194101B3 /* Products */;
+					ProjectRef = 47DF0C257CE2731854F25FCD /* OpenGLSupport.xcodeproj */;
+				},
+				{
+					ProductGroup = 4482575C639222D90717331B /* Products */;
+					ProjectRef = 68744A904B170A0434433C6F /* BulletDynamics.xcodeproj */;
+				},
+				{
+					ProductGroup = 7CA07B46514A10E46BD85813 /* Products */;
+					ProjectRef = 6E2D7BED34900B24123A5F05 /* BulletCollision.xcodeproj */;
+				},
+				{
+					ProductGroup = 73F90598484A27F17D8B5D1F /* Products */;
+					ProjectRef = 07FB2E311D4347B966DC261F /* LinearMath.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				51342E1B129C73373269356A /* App_VoronoiFractureDemo_xcode4 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		1D407ADD7DE764CB70CF4B71 /* libOpenGLSupport.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "../../lib/libOpenGLSupport.a";
+			remoteRef = 13081150239D2E0F0D58342C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		25BC73B97ED56136473F31EE /* libBulletDynamics.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "../../lib/libBulletDynamics.a";
+			remoteRef = 319D41231C803DDE5BF07648 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		74CF7828272F1A5E17A22C8B /* libBulletCollision.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "../../lib/libBulletCollision.a";
+			remoteRef = 028645C47BFC68FD489A1892 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		452069AD7EB9613721881DDA /* libLinearMath.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "../../lib/libLinearMath.a";
+			remoteRef = 472506E4082F490572123074 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		123B1596527A00A442944098 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5616691C6A6A03610CA534BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				774E5C38087B591175952C95 /* VoronoiFractureDemo.cpp in Sources */,
+				610257E92A650D8A1AF22E9A /* Win32VoronoiFractureDemo.cpp in Sources */,
+				7DD201FF290517447E6806B6 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+/* End PBXVariantGroup section */
+
+/* Begin PBXTargetDependency section */
+		50A132DC3070224237EE71A0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libOpenGLSupport.a";
+			targetProxy = 55831B875AF25735629756BB /* PBXContainerItemProxy */;
+		};
+		033B389A1A9C148F3CB9402F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libBulletDynamics.a";
+			targetProxy = 1B2F4A7B77C87AE373A16682 /* PBXContainerItemProxy */;
+		};
+		26F554071F5677D22BA55E46 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libBulletCollision.a";
+			targetProxy = 45A8485902013BCD4FF426A1 /* PBXContainerItemProxy */;
+		};
+		34A969164F8955E568FF4D05 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libLinearMath.a";
+			targetProxy = 377838981E515EDC3FF578F5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		6410665D78412BAF27DA6CED /* Release Native 32-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT) $(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				VALID_ARCHS = "x86_64 i386";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				CONFIGURATION_BUILD_DIR = "../..";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "App_VoronoiFractureDemo_xcode4";
+			};
+			name = "Release Native 32-bit";
+		};
+		048403D759E433F87BAB4801 /* Release Native 64-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT) $(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				VALID_ARCHS = "x86_64 i386";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				CONFIGURATION_BUILD_DIR = "../..";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "App_VoronoiFractureDemo_xcode4_x64_release";
+			};
+			name = "Release Native 64-bit";
+		};
+		0B9308686697734A37460985 /* Debug Native 32-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT) $(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				VALID_ARCHS = "x86_64 i386";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "../..";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "App_VoronoiFractureDemo_xcode4_debug";
+			};
+			name = "Debug Native 32-bit";
+		};
+		6B2C528C057B52EF5A9A70F4 /* Debug Native 64-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT) $(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				VALID_ARCHS = "x86_64 i386";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = "../..";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "App_VoronoiFractureDemo_xcode4_x64_debug";
+			};
+			name = "Debug Native 64-bit";
+		};
+		6417475D677C1E4E160A0520 /* Release Native 32-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT) $(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				VALID_ARCHS = "x86_64 i386";
+				SDKROOT = macosx;
+				ARCHS = "i386";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../src",
+					"../../Demos/OpenGL",
+				);
+				OBJROOT = "obj/x32/Release/App_VoronoiFractureDemo";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+				);
+				OTHER_LDFLAGS = (
+					"-framework Carbon -framework OpenGL -framework AGL -framework Glut",
+				);
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../..";
+			};
+			name = "Release Native 32-bit";
+		};
+		6735053E4026014A41CB783B /* Release Native 64-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT) $(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				VALID_ARCHS = "x86_64 i386";
+				SDKROOT = macosx;
+				ARCHS = "x86_64";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../src",
+					"../../Demos/OpenGL",
+				);
+				OBJROOT = "obj/x64/Release/App_VoronoiFractureDemo";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+				);
+				OTHER_LDFLAGS = (
+					"-framework Carbon -framework OpenGL -framework AGL -framework Glut",
+				);
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../..";
+			};
+			name = "Release Native 64-bit";
+		};
+		16310C9053B86BE84F901531 /* Debug Native 32-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT) $(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				VALID_ARCHS = "x86_64 i386";
+				SDKROOT = macosx;
+				ARCHS = "i386";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../src",
+					"../../Demos/OpenGL",
+				);
+				OBJROOT = "obj/x32/Debug/App_VoronoiFractureDemo";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+				);
+				OTHER_LDFLAGS = (
+					"-framework Carbon -framework OpenGL -framework AGL -framework Glut",
+				);
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../..";
+			};
+			name = "Debug Native 32-bit";
+		};
+		402006D144D11FD109094D3B /* Debug Native 64-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT) $(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				VALID_ARCHS = "x86_64 i386";
+				SDKROOT = macosx;
+				ARCHS = "x86_64";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../src",
+					"../../Demos/OpenGL",
+				);
+				OBJROOT = "obj/x64/Debug/App_VoronoiFractureDemo";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-ffast-math",
+				);
+				OTHER_LDFLAGS = (
+					"-framework Carbon -framework OpenGL -framework AGL -framework Glut",
+				);
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
+				SYMROOT = "../..";
+			};
+			name = "Debug Native 64-bit";
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3984152D44883E69727646E3 /* Build configuration list for PBXNativeTarget "App_VoronoiFractureDemo_xcode4" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6410665D78412BAF27DA6CED /* Release Native 32-bit */,
+				048403D759E433F87BAB4801 /* Release Native 64-bit */,
+				0B9308686697734A37460985 /* Debug Native 32-bit */,
+				6B2C528C057B52EF5A9A70F4 /* Debug Native 64-bit */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Release Native 32-bit";
+		};
+		1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "App_VoronoiFractureDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6417475D677C1E4E160A0520 /* Release Native 32-bit */,
+				6735053E4026014A41CB783B /* Release Native 64-bit */,
+				16310C9053B86BE84F901531 /* Debug Native 32-bit */,
+				402006D144D11FD109094D3B /* Debug Native 64-bit */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Release Native 32-bit";
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
