@@ -14,7 +14,7 @@
 		<string>https://github.com/andyreagan/ludobots.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>bullet-2.82-r2704/build/xcode4/0BulletSolution.xcworkspace</string>
+	<string>project-bodyparts/build/xcode4/0BulletSolution.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>45C5FE9241A1BEF06A9218A22419B912147D3C65</key>
@@ -34,7 +34,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>45C5FE9241A1BEF06A9218A22419B912147D3C65</string>
 			<key>IDESourceControlWCCName</key>
-			<string>CSYS295</string>
+			<string>CSYS295evolutionary-robotics</string>
 		</dict>
 	</array>
 </dict>

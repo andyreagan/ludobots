@@ -31,10 +31,8 @@ class btDefaultCollisionConfiguration;
 
 class RagdollDemo : public GlutDemoApplication
 {
-
-	btAlignedObjectArray<class RagDoll*> m_ragdolls;
-
 	//keep the collision shapes, for deletion/cleanup
+    
 	btAlignedObjectArray<btCollisionShape*>	m_collisionShapes;
 
 	btBroadphaseInterface*	m_broadphase;
@@ -44,8 +42,15 @@ class RagdollDemo : public GlutDemoApplication
 	btConstraintSolver*	m_solver;
 
 	btDefaultCollisionConfiguration* m_collisionConfiguration;
+    
+    btRigidBody* body[9]; // one main body, 4x2 leg segments
+    
+    btCollisionShape* geom[9];
+    
+    bool pause;
 
 public:
+    
 	void initPhysics();
 
 	void exitPhysics();
@@ -54,8 +59,6 @@ public:
 	{
 		exitPhysics();
 	}
-
-	void spawnRagdoll(const btVector3& startOffset);
 
 	virtual void clientMoveAndDisplay();
 
@@ -70,8 +73,84 @@ public:
 		demo->initPhysics();
 		return demo;
 	}
-	
+    
+    void CreateBox( int index, double x, double y, double z, double length, double height, double width) {
+        
+        btVector3 localInertia(0,0,0);
+        
+        btTransform offset; offset.setIdentity();
+        offset.setOrigin(btVector3(btScalar(x), btScalar(y), btScalar(z)));
+        
+        btDefaultMotionState* myMotionState = new btDefaultMotionState(offset);
+        
+        geom[index] = new btBoxShape(btVector3(btScalar(length), btScalar(height), btScalar(width)));
+        
+        btRigidBody::btRigidBodyConstructionInfo rbInfo(btScalar(1.),myMotionState,geom[index],localInertia);
+        body[index] = new btRigidBody(rbInfo);
+        
+        m_dynamicsWorld->addRigidBody(body[index]);
+    }
+    
+    void CreateCylinderX( int index, double x, double y, double z, double xv, double yv, double zv) {
+        
+        btVector3 localInertia(0,0,0);
+        
+        btTransform offset; offset.setIdentity();
+        offset.setOrigin(btVector3(btScalar(x), btScalar(y), btScalar(z)));
+        
+        btDefaultMotionState* myMotionState = new btDefaultMotionState(offset);
+        
+        geom[index] = new btCylinderShapeX(btVector3(btScalar(xv), btScalar(yv), btScalar(zv)));
+        
+        btRigidBody::btRigidBodyConstructionInfo rbInfo(btScalar(1.),myMotionState,geom[index],localInertia);
+        body[index] = new btRigidBody(rbInfo);
+        
+        m_dynamicsWorld->addRigidBody(body[index]);
+    }
+    
+    void CreateCylinderY( int index, double x, double y, double z, double xv, double yv, double zv) {
+        
+        btVector3 localInertia(0,0,0);
+        
+        btTransform offset; offset.setIdentity();
+        offset.setOrigin(btVector3(btScalar(x), btScalar(y), btScalar(z)));
+        
+        btDefaultMotionState* myMotionState = new btDefaultMotionState(offset);
+        
+        geom[index] = new btCylinderShape(btVector3(btScalar(xv), btScalar(yv), btScalar(zv)));
+        
+        btRigidBody::btRigidBodyConstructionInfo rbInfo(btScalar(1.),myMotionState,geom[index],localInertia);
+        body[index] = new btRigidBody(rbInfo);
+        
+        m_dynamicsWorld->addRigidBody(body[index]);
+    }
+    
+    void CreateCylinderZ( int index, double x, double y, double z, double xv, double yv, double zv) {
+        
+        btVector3 localInertia(0,0,0);
+        
+        btTransform offset; offset.setIdentity();
+        offset.setOrigin(btVector3(btScalar(x), btScalar(y), btScalar(z)));
+        
+        btDefaultMotionState* myMotionState = new btDefaultMotionState(offset);
+        
+        geom[index] = new btCylinderShapeZ(btVector3(btScalar(xv), btScalar(yv), btScalar(zv)));
+        
+        btRigidBody::btRigidBodyConstructionInfo rbInfo(btScalar(1.),myMotionState,geom[index],localInertia);
+        body[index] = new btRigidBody(rbInfo);
+        
+        m_dynamicsWorld->addRigidBody(body[index]);
+    }
+    
+    void DeleteObject( int index ) {
+        m_dynamicsWorld->removeRigidBody( body[index] );
+        delete body[index];
+        delete geom[index];
+    }
 };
+
+
+
 
 
 #endif

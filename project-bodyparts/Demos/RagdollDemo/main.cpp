@@ -18,7 +18,7 @@ subject to the following restrictions:
 #include "GLDebugDrawer.h"
 #include "btBulletDynamicsCommon.h"
 
-GLDebugDrawer	gDebugDrawer;
+GLDebugDrawer gDebugDrawer;
 
 int main(int argc,char* argv[])
 {
@@ -26,6 +26,6 @@ int main(int argc,char* argv[])
 
         demoApp.initPhysics();
 		demoApp.getDynamicsWorld()->setDebugDrawer(&gDebugDrawer);
-
+    
         return glutmain(argc, argv,640,480,"Bullet Physics Demo by Andy Reagan. http://bulletphysics.com",&demoApp);
 }
