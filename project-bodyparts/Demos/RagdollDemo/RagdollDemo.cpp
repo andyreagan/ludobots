@@ -106,7 +106,7 @@ public:
 
 	virtual	~RagDoll ()
 	{
-		int i;
+		// int i;
 
 		// Remove all constraints
 //		for ( i = 0; i < JOINT_COUNT; ++i)
@@ -174,14 +174,14 @@ void RagdollDemo::initPhysics()
 	// spawnRagdoll(startOffset);
     
     CreateBox(0, 0., 2., 0., 1., .2, 1.);
-    CreateCylinderX(1, 2.0, 2., 0., 1., .2, 0.);
-    CreateCylinderX(2, -2.0, 2., 0., 1., .2, 0.);
-    CreateCylinderY(3, 3., 1.0, 0., .2, 1., .2);
-    CreateCylinderY(4, -3., 1.0, 0., .2, 1., .2);
-    CreateCylinderZ(5, 0., 2., -2.0, .2, 0., 1.);
-    CreateCylinderZ(6, 0., 2., 2.0, .2, 0., 1.);
-    CreateCylinderY(7, 0., 1.0, 3., .2, 1., .2);
-    CreateCylinderY(8, 0., 1.0, -3., .2, 1., .2);
+    CreateCylinder(1, 2.0, 2., 0., 1., .2, 0., 'x');
+    CreateCylinder(2, -2.0, 2., 0., 1., .2, 0., 'x');
+    CreateCylinder(3, 3., 1.0, 0., .2, 1., .2, 'y');
+    CreateCylinder(4, -3., 1.0, 0., .2, 1., .2, 'y');
+    CreateCylinder(5, 0., 2., -2.0, .2, 0., 1., 'z');
+    CreateCylinder(6, 0., 2., 2.0, .2, 0., 1., 'z');
+    CreateCylinder(7, 0., 1.0, 3., .2, 1., .2, 'y');
+    CreateCylinder(8, 0., 1.0, -3., .2, 1., .2, 'y');
     pause = !pause;
     clientResetScene();
 }
@@ -204,7 +204,7 @@ void RagdollDemo::clientMoveAndDisplay()
         }
 		
 		//optional but useful: debug drawing
-		m_dynamicsWorld->debugDrawWorld();
+		// m_dynamicsWorld->debugDrawWorld();
 
 
 	}
@@ -216,9 +216,58 @@ void RagdollDemo::clientMoveAndDisplay()
 	glutSwapBuffers();
 }
 
+void RagdollDemo::CreateBox( int index, double x, double y, double z, double length, double height, double width) {
+    
+    btVector3 localInertia(0,0,0);
+    
+    btTransform offset;
+    offset.setIdentity();
+    offset.setOrigin(btVector3(btScalar(x), btScalar(y), btScalar(z)));
+    
+    btDefaultMotionState* myMotionState = new btDefaultMotionState(offset);
+    
+    geom[index] = new btBoxShape(btVector3(btScalar(length), btScalar(height), btScalar(width)));
+    
+    btRigidBody::btRigidBodyConstructionInfo rbInfo(btScalar(1.),myMotionState,geom[index],localInertia);
+    body[index] = new btRigidBody(rbInfo);
+    
+    m_dynamicsWorld->addRigidBody(body[index]);
+}
+
+void RagdollDemo::CreateCylinder( int index, double x, double y, double z, double xv, double yv, double zv, char orientation) {
+    
+    btVector3 localInertia(0,0,0);
+    
+    btTransform offset; offset.setIdentity();
+    offset.setOrigin(btVector3(btScalar(x), btScalar(y), btScalar(z)));
+    
+    btDefaultMotionState* myMotionState = new btDefaultMotionState(offset);
+    
+    switch (orientation)
+    {
+        case 'x':
+        {
+            geom[index] = new btCylinderShapeX(btVector3(btScalar(xv), btScalar(yv), btScalar(zv)));
+            break;
+        }
+        case 'z':
+        {
+            geom[index] = new btCylinderShapeZ(btVector3(btScalar(xv), btScalar(yv), btScalar(zv)));
+            break;
+        }
+        default:
+            geom[index] = new btCylinderShape(btVector3(btScalar(xv), btScalar(yv), btScalar(zv)));
+    }
+    
+    btRigidBody::btRigidBodyConstructionInfo rbInfo(btScalar(1.),myMotionState,geom[index],localInertia);
+    body[index] = new btRigidBody(rbInfo);
+    
+    m_dynamicsWorld->addRigidBody(body[index]);
+}
+
 void RagdollDemo::displayCallback()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	renderme();
 
