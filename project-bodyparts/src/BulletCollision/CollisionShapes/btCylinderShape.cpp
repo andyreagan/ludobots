@@ -22,6 +22,8 @@ m_upAxis(1)
 	setSafeMargin(halfExtents);
 
 	btVector3 margin(getMargin(),getMargin(),getMargin());
+    // setting this variable based on the passed in half-extents
+    // and this is used to generate the size
 	m_implicitShapeDimensions = (halfExtents * m_localScaling) - margin;
 	m_shapeType = CYLINDER_SHAPE_PROXYTYPE;
 }

@@ -169,7 +169,9 @@ void	RollingFrictionDemo::initPhysics()
 	}
 
 	{
+        
 		//create a few dynamic rigidbodies
+        
 		// Re-using the same collision is better for memory usage and performance
 #define NUM_SHAPES 10
 		btCollisionShape* colShapes[NUM_SHAPES] = {

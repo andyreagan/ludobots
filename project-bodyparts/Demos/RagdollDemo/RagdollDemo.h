@@ -52,6 +52,27 @@ class RagdollDemo : public GlutDemoApplication
     bool oneStep;
     
     bool pause;
+    
+    double offsets[8];
+    
+//    // need to do some collision masking
+//    // and I'm going to ignore when body parts collide with one another
+//    // reference:
+//    // http://bulletphysics.org/mediawiki-1.5.8/index.php/Collision_Filtering
+//    #define BIT(x) (1<<(x))
+//    enum collisiontypes {
+//        COL_NOTHING = 0, // 00000000
+//        COL_LOWER_LEG = BIT(0), // 00000001
+//        COL_UPPER_LEG = BIT(1), // 00000010
+//        COL_BODY = BIT(2), // 00000011
+//        COL_LAND = BIT(6), //00000111
+//    };
+//    
+//    int nothingCollidesWith = COL_NOTHING;
+//    int lowerLegCollidesWith = COL_LOWER_LEG;
+//    int upperLegCollidesWith = COL_UPPER_LEG;
+//    int bodyCollidesWith = COL_BODY;
+//    int landCollidesWith = COL_LAND;
 
 public:
     
@@ -80,13 +101,41 @@ public:
     
     void CreateBox( int index, double x, double y, double z, double length, double height, double width);
     
-    void CreateCylinder( int index, double x, double y, double z, double xv, double yv, double zv, char orientation);
+    // void CreateCylinder( int index, double x, double y, double z, double xv, double yv, double zv, char orientation);
+    void CreateCylinder( int index, double x, double y, double z, double r, double len, char orientation);
+    
+    void CreateHinge(int index, int body1, int body2, double x, double y, double z, double ax, double ay, double az, double theta1, double theta2);
     
     void DeleteObject( int index ) {
         m_dynamicsWorld->removeRigidBody( body[index] );
         delete body[index];
         delete geom[index];
     }
+    
+    void DestroyHinge( int index ) {
+        m_dynamicsWorld->removeConstraint( joints[index] );
+        delete joints[index];
+    }
+    
+    btVector3 PointWorldToLocal(int index, btVector3 &p) {
+        btTransform local1 = body[index]->getCenterOfMassTransform().inverse();
+        return local1 * p;
+    }
+    
+    btVector3 AxisWorldToLocal(int index, btVector3 &a) {
+        btTransform local1 = body[index]->getCenterOfMassTransform().inverse();
+        btVector3 zero(0,0,0);
+        local1.setOrigin(zero);
+        return local1 * a;
+    }
+    
+    
+    
+    void ActuateJoint(int jointIndex, double desiredAngle,
+                      double jointOffset, double timeStep);
+    
+    void ActuateJoint2(int jointIndex, double desiredAngle,
+                      double timeStep);
 };
 
 

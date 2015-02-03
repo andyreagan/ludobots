@@ -89,7 +89,7 @@ public:
 		// m_bodies[BODYPART_PELVIS] = localCreateRigidBody(btScalar(1.), offset*transform, m_shapes[BODYPART_PELVIS]);
 
 		// Now setup the constraints
-		btHingeConstraint* hingeC;
+		// btHingeConstraint* hingeC;
     
 		btTransform localA, localB;
 
@@ -163,8 +163,8 @@ void RagdollDemo::initPhysics()
 		btCollisionObject* fixedGround = new btCollisionObject();
 		fixedGround->setCollisionShape(groundShape);
 		fixedGround->setWorldTransform(groundTransform);
-		m_dynamicsWorld->addCollisionObject(fixedGround);
-
+        // m_dynamicsWorld->addCollisionObject(fixedGround, COL_POWERUP, powerupCollidesWith);
+        m_dynamicsWorld->addCollisionObject(fixedGround);
 	}
 
 	// Spawn one ragdoll
@@ -173,15 +173,53 @@ void RagdollDemo::initPhysics()
     // startOffset.setValue(-1,0.5,0);
 	// spawnRagdoll(startOffset);
     
-    CreateBox(0, 0., 2., 0., 1., .2, 1.);
-    CreateCylinder(1, 2.0, 2., 0., 1., .2, 0., 'x');
-    CreateCylinder(2, -2.0, 2., 0., 1., .2, 0., 'x');
-    CreateCylinder(3, 3., 1.0, 0., .2, 1., .2, 'y');
-    CreateCylinder(4, -3., 1.0, 0., .2, 1., .2, 'y');
-    CreateCylinder(5, 0., 2., -2.0, .2, 0., 1., 'z');
-    CreateCylinder(6, 0., 2., 2.0, .2, 0., 1., 'z');
-    CreateCylinder(7, 0., 1.0, 3., .2, 1., .2, 'y');
-    CreateCylinder(8, 0., 1.0, -3., .2, 1., .2, 'y');
+    // starting it at 0,0,0 puts it halfway in the ground box
+    // so this definitely positions the center
+    // the moving it up to 0,.2,0 gets it out of the ground
+    // so the thing must have size 2,.4,2
+    
+    // this starts at exactly 1 off the ground
+    // and has size 1,.2,1
+    CreateBox(0, 0., 1.1, 0., 0.5, .1, 0.5);
+    
+    CreateCylinder(1, 1., 1.1, 0., .1, 0.5, 'x');
+    CreateCylinder(2, -1., 1.1, 0., .1, 0.5, 'x');
+    CreateCylinder(3, 1.5, 0.6, 0.0, .1, 0.5, 'y');
+    CreateCylinder(4, -1.5, 0.6, 0.0, .1, 0.5, 'y');
+    CreateCylinder(5, 0., 1.1, 1., .1, 0.5, 'z');
+    CreateCylinder(6, 0., 1.1, -1., .1, 0.5, 'z');
+    CreateCylinder(7, 0., .6, 1.5, .1, 0.5, 'y');
+    CreateCylinder(8, 0., .6, -1.5, .1, 0.5, 'y');
+    
+    // trying to get these offsets right....not so easy!
+    
+    offsets[0] = 0;
+    offsets[1] = 0;
+    offsets[2] = 0;
+    offsets[3] = 0;
+    offsets[4] = 0;
+    offsets[5] = 0;
+    offsets[6] = 0;
+    offsets[7] = 0;
+    
+    // left leg knee
+    CreateHinge(0,1,3,1.5,1.1,0.0,0,0,-1,(-45.+offsets[0])*3.14159/180., (45.+offsets[0])*3.14159/180.);
+    // right leg knee
+    CreateHinge(1,2,4,-1.5,1.1,0.0,0,0,1,(-45.+offsets[1])*3.14159/180., (45.+offsets[1])*3.14159/180.);
+    // far leg knee
+    CreateHinge(2,5,7,0,1.1,1.5,1,0,0,(-45.+offsets[2])*3.14159/180., (45.+offsets[2])*3.14159/180.);
+    // close leg knee
+    CreateHinge(3,6,8,0,1.1,-1.5,-1,0,0,(-45.+offsets[3])*3.14159/180., (45.+offsets[3])*3.14159/180.);
+
+    // left leg body
+    CreateHinge(4,0,1,0.5,1.1,0.0,0,0,-1,(-45.+offsets[4])*3.14159/180., (45.+offsets[4])*3.14159/180.);
+    // right leg body
+    CreateHinge(5,0,2,-0.5,1.1,0.0,0,0,1,(-45.+offsets[5])*3.14159/180., (45.+offsets[5])*3.14159/180.);
+    // far leg body
+    CreateHinge(6,0,5,0.,1.1,0.5,1,0,0,(-45.+offsets[6])*3.14159/180., (45.+offsets[6])*3.14159/180.);
+    // close leg body
+    CreateHinge(7,0,6,0.,1.1,-0.5,-1,0,0,(-45.+offsets[7])*3.14159/180., (45.+offsets[7])*3.14159/180.);
+    
     pause = !pause;
     clientResetScene();
 }
@@ -199,14 +237,31 @@ void RagdollDemo::clientMoveAndDisplay()
 
 	if (m_dynamicsWorld)
 	{
-        if (!pause) {
+        if (!pause || (pause && oneStep)) {
+//            double knees,bodyj;
+//            knees = 45;
+//            bodyj = 45;
+//            ActuateJoint2(0, knees, ms / 1000000.f);
+//            ActuateJoint2(1, knees, ms / 1000000.f);
+//            ActuateJoint2(2, knees, ms / 1000000.f);
+//            ActuateJoint2(3, knees, ms / 1000000.f);
+//            ActuateJoint2(4, bodyj, ms / 1000000.f);
+//            ActuateJoint2(5, bodyj, ms / 1000000.f);
+//            ActuateJoint2(6, bodyj, ms / 1000000.f);
+//            ActuateJoint2(7, bodyj, ms / 1000000.f);
+            ActuateJoint2(0, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+            ActuateJoint2(1, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+            ActuateJoint2(2, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+            ActuateJoint2(3, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+            ActuateJoint2(4, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+            ActuateJoint2(5, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+            ActuateJoint2(6, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+            ActuateJoint2(7, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
             m_dynamicsWorld->stepSimulation(ms / 1000000.f);
+            oneStep = !oneStep;
         }
-		
 		//optional but useful: debug drawing
 		// m_dynamicsWorld->debugDrawWorld();
-
-
 	}
 
 	renderme(); 
@@ -216,9 +271,10 @@ void RagdollDemo::clientMoveAndDisplay()
 	glutSwapBuffers();
 }
 
-void RagdollDemo::CreateBox( int index, double x, double y, double z, double length, double height, double width) {
+void RagdollDemo::CreateBox( int index, double x, double y, double z, double length, double height, double width)
+{
     
-    btVector3 localInertia(0,0,0);
+    btVector3 localInertia(0.,0.,0.);
     
     btTransform offset;
     offset.setIdentity();
@@ -231,39 +287,125 @@ void RagdollDemo::CreateBox( int index, double x, double y, double z, double len
     btRigidBody::btRigidBodyConstructionInfo rbInfo(btScalar(1.),myMotionState,geom[index],localInertia);
     body[index] = new btRigidBody(rbInfo);
     
+    // m_dynamicsWorld->addRigidBody(body[index], COL_LAND, landCollidesWith);
     m_dynamicsWorld->addRigidBody(body[index]);
 }
 
-void RagdollDemo::CreateCylinder( int index, double x, double y, double z, double xv, double yv, double zv, char orientation) {
+// void RagdollDemo::CreateCylinder( int index, double x, double y, double xv, double yv, double zv, char orientation) {
+void RagdollDemo::CreateCylinder( int index, double x, double y, double z, double r, double len, char orientation)
+{
     
-    btVector3 localInertia(0,0,0);
+    // for some reason, giving them a bump to start makes them behave normally
+    // btVector3 localInertia(1.5,0.,1.5);
+    // btVector3 localInertia(.01,.0,.01);
+    
+    btVector3 localInertia(0.,0.,0.);
     
     btTransform offset; offset.setIdentity();
     offset.setOrigin(btVector3(btScalar(x), btScalar(y), btScalar(z)));
     
-    btDefaultMotionState* myMotionState = new btDefaultMotionState(offset);
+    // btDefaultMotionState* myMotionState = new btDefaultMotionState(offset);
+    
+    btScalar	mass(1.f);
     
     switch (orientation)
     {
+            /*
+             cylinder is defined as following:
+             *
+             * - principle axis aligned along y by default, radius in x, z-value not used
+             * - for btCylinderShapeX: principle axis aligned along x, radius in y direction, z-value not used
+             * - for btCylinderShapeZ: principle axis aligned along z, radius in x direction, y-value not used
+             *
+             */
         case 'x':
         {
-            geom[index] = new btCylinderShapeX(btVector3(btScalar(xv), btScalar(yv), btScalar(zv)));
+            // offset.getBasis().setEulerZYX(btScalar(0), btScalar(0), btScalar(M_PI_2));
+            btDefaultMotionState* myMotionState = new btDefaultMotionState(offset);
+            // know that the x axis is principle, z axis not used
+            // geom[index] = new btCylinderShapeX(btVector3(btScalar(xv), btScalar(yv), btScalar(zv)));
+            geom[index] = new btCylinderShapeX(btVector3(btScalar(len), btScalar(r), btScalar(0.)));
+            // geom[index] = new btCapsuleShape(btScalar(r),btScalar(len));
+            // geom[index] = new btCylinderShape(btVector3(btScalar(r), btScalar(len), btScalar(0.)));
+            btCollisionShape* colShape = geom[index];
+            colShape->calculateLocalInertia(mass,localInertia);
+            btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,colShape,localInertia);
+            body[index] = new btRigidBody(rbInfo);
+            // m_dynamicsWorld->addRigidBody(body[index], COL_LAND, landCollidesWith);
+            m_dynamicsWorld->addRigidBody(body[index]);
             break;
         }
         case 'z':
         {
-            geom[index] = new btCylinderShapeZ(btVector3(btScalar(xv), btScalar(yv), btScalar(zv)));
+            // offset.getBasis().setEulerZYX(btScalar(M_PI_2), btScalar(0), btScalar(0));
+            btDefaultMotionState* myMotionState = new btDefaultMotionState(offset);
+            // geom[index] = new btCylinderShapeZ(btVector3(btScalar(xv), btScalar(yv), btScalar(zv)));
+            geom[index] = new btCylinderShapeZ(btVector3(btScalar(r), btScalar(0.), btScalar(len)));
+            // geom[index] = new btCapsuleShape(btScalar(r),btScalar(len));
+            // geom[index] = new btCylinderShape(btVector3(btScalar(r), btScalar(len), btScalar(0.)));
+            btCollisionShape* colShape = geom[index];
+            colShape->calculateLocalInertia(mass,localInertia);
+            btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,colShape,localInertia);
+            body[index] = new btRigidBody(rbInfo);
+            // m_dynamicsWorld->addRigidBody(body[index], COL_LAND, landCollidesWith);
+            m_dynamicsWorld->addRigidBody(body[index]);
             break;
         }
         default:
-            geom[index] = new btCylinderShape(btVector3(btScalar(xv), btScalar(yv), btScalar(zv)));
+            // offset.getBasis().setEulerZYX(btScalar(0), btScalar(M_PI_2), btScalar(0));
+            btDefaultMotionState* myMotionState = new btDefaultMotionState(offset);
+            // geom[index] = new btCapsuleShape(btScalar(r),btScalar(len));
+            // geom[index] = new btCylinderShape(btVector3(btScalar(xv), btScalar(yv), btScalar(zv)));
+            geom[index] = new btCylinderShape(btVector3(btScalar(r), btScalar(len), btScalar(0.)));
+            btCollisionShape* colShape = geom[index];
+            colShape->calculateLocalInertia(mass,localInertia);
+            btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,colShape,localInertia);
+            body[index] = new btRigidBody(rbInfo);
+            // m_dynamicsWorld->addRigidBody(body[index], COL_LAND, landCollidesWith);
+            m_dynamicsWorld->addRigidBody(body[index]);
     }
-    
-    btRigidBody::btRigidBodyConstructionInfo rbInfo(btScalar(1.),myMotionState,geom[index],localInertia);
-    body[index] = new btRigidBody(rbInfo);
-    
-    m_dynamicsWorld->addRigidBody(body[index]);
 }
+
+void RagdollDemo::CreateHinge(int index, int body1, int body2,
+                 double x, double y, double z,
+                 double ax, double ay, double az,
+                 double theta1, double theta2)
+{
+    btVector3 p(x, y, z);
+    btVector3 a(ax, ay, az);
+    btVector3 p1 = PointWorldToLocal(body1, p);
+    btVector3 p2 = PointWorldToLocal(body2, p);
+    btVector3 a1 = AxisWorldToLocal(body1, a);
+    btVector3 a2 = AxisWorldToLocal(body2, a);
+    joints[index] = new btHingeConstraint(*body[body1], *body[body2],
+                                          p1, p2,
+                                          a1, a2, false);
+    if (index < 8)
+    {
+        joints[index]->setLimit(theta1,theta2);
+    }
+    m_dynamicsWorld->addConstraint( joints[index] , true);
+}
+
+void RagdollDemo::ActuateJoint(int jointIndex, double desiredAngle,
+                               double jointOffset, double timeStep)
+{
+    joints[jointIndex]->enableMotor(1);
+    joints[jointIndex]->setMaxMotorImpulse(2);
+    joints[jointIndex]->setMotorTarget(desiredAngle, 1);
+}
+
+void RagdollDemo::ActuateJoint2(int jointIndex, double desiredAngle,
+                                double timeStep)
+{
+    double currentAngle;
+    currentAngle = joints[jointIndex]->getHingeAngle();
+    double maxImpulse = 2.0;
+    double diff;
+    diff = desiredAngle-(currentAngle+offsets[jointIndex]);
+    joints[jointIndex]->enableAngularMotor(true, 20*diff, maxImpulse);
+}
+
 
 void RagdollDemo::displayCallback()
 {
@@ -285,12 +427,17 @@ void RagdollDemo::keyboardCallback(unsigned char key, int x, int y)
 	{
 	case 'e':
 		{
-		btVector3 startOffset(0,2,0);
-		break;
+            btVector3 startOffset(0,2,0);
+            break;
 		}
     case 'p':
         {
             pause = !pause;
+            break;
+        }
+    case 'o':
+        {
+            oneStep = !oneStep;
             break;
         }
 	default:
@@ -342,7 +489,6 @@ void RagdollDemo::exitPhysics()
 	delete m_dispatcher;
 
 	delete m_collisionConfiguration;
-
 	
 }
 
