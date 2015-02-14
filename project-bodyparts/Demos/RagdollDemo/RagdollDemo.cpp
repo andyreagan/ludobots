@@ -128,11 +128,44 @@ public:
 	}
 };
 
+static RagdollDemo* ragdollDemo;
 
+// bool RagdollDemo::myContactProcessedCallback(btManifoldPoint& cp,
+bool myContactProcessedCallback(btManifoldPoint& cp,
+                                void* body0, void* body1)
+{
+    int *ID1, *ID2;
+    btCollisionObject* o1 = static_cast<btCollisionObject*>(body0);
+    btCollisionObject* o2 = static_cast<btCollisionObject*>(body1);
+    int groundID = 9;
+    
+    ID1 = static_cast<int*>(o1->getUserPointer());
+    ID2 = static_cast<int*>(o2->getUserPointer());
+    
+    /* Your code will go here. See the next step. */
+    
+    // printf("ID1 = %d, ID2 = %d\n", *ID1, *ID2);
+    
+    ragdollDemo->touches[*ID1] = 1;
+    ragdollDemo->touches[*ID2] = 1;
+    
+    ragdollDemo->touchPoints[*ID1] = cp.m_positionWorldOnB;
+    ragdollDemo->touchPoints[*ID2] = cp.m_positionWorldOnB;
+    
+    return false;
+}
 
 
 void RagdollDemo::initPhysics()
 {
+    
+    ragdollDemo = this;
+    gContactProcessedCallback = myContactProcessedCallback;
+    
+    for (int i=0; i<10; i++) {
+        touches[i] = 0;
+    }
+    
 	// Setup the basic world
 
 	setTexturing(true);
@@ -165,6 +198,7 @@ void RagdollDemo::initPhysics()
 		fixedGround->setWorldTransform(groundTransform);
         // m_dynamicsWorld->addCollisionObject(fixedGround, COL_POWERUP, powerupCollidesWith);
         m_dynamicsWorld->addCollisionObject(fixedGround);
+        (fixedGround)->setUserPointer( &(IDs[9]) );
 	}
 
 	// Spawn one ragdoll
@@ -172,6 +206,10 @@ void RagdollDemo::initPhysics()
 	// spawnRagdoll(startOffset);
     // startOffset.setValue(-1,0.5,0);
 	// spawnRagdoll(startOffset);
+    
+    for (int i=0; i<10; i++) {
+        IDs[i] = i;
+    }
     
     // starting it at 0,0,0 puts it halfway in the ground box
     // so this definitely positions the center
@@ -238,6 +276,7 @@ void RagdollDemo::clientMoveAndDisplay()
 	if (m_dynamicsWorld)
 	{
         if (!pause || (pause && oneStep)) {
+            
 //            double knees,bodyj;
 //            knees = 45;
 //            bodyj = 45;
@@ -249,6 +288,7 @@ void RagdollDemo::clientMoveAndDisplay()
 //            ActuateJoint2(5, bodyj, ms / 1000000.f);
 //            ActuateJoint2(6, bodyj, ms / 1000000.f);
 //            ActuateJoint2(7, bodyj, ms / 1000000.f);
+            
             ActuateJoint2(0, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
             ActuateJoint2(1, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
             ActuateJoint2(2, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
@@ -257,8 +297,20 @@ void RagdollDemo::clientMoveAndDisplay()
             ActuateJoint2(5, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
             ActuateJoint2(6, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
             ActuateJoint2(7, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+            
+            
+            for (int i=0; i<10; i++) {
+                touches[i] = 0;
+            }
+            
             m_dynamicsWorld->stepSimulation(ms / 1000000.f);
             oneStep = !oneStep;
+            
+            for (int i=0; i<10; i++) {
+                 printf("%d", touches[i]);
+            }
+            printf("\n");
+           
         }
 		//optional but useful: debug drawing
 		// m_dynamicsWorld->debugDrawWorld();
@@ -289,6 +341,8 @@ void RagdollDemo::CreateBox( int index, double x, double y, double z, double len
     
     // m_dynamicsWorld->addRigidBody(body[index], COL_LAND, landCollidesWith);
     m_dynamicsWorld->addRigidBody(body[index]);
+    
+    (body[index])->setUserPointer( &(IDs[index]) );
 }
 
 // void RagdollDemo::CreateCylinder( int index, double x, double y, double xv, double yv, double zv, char orientation) {
@@ -364,6 +418,7 @@ void RagdollDemo::CreateCylinder( int index, double x, double y, double z, doubl
             // m_dynamicsWorld->addRigidBody(body[index], COL_LAND, landCollidesWith);
             m_dynamicsWorld->addRigidBody(body[index]);
     }
+    (body[index])->setUserPointer( &(IDs[index]) );
 }
 
 void RagdollDemo::CreateHinge(int index, int body1, int body2,
@@ -405,6 +460,8 @@ void RagdollDemo::ActuateJoint2(int jointIndex, double desiredAngle,
     diff = desiredAngle-(currentAngle+offsets[jointIndex]);
     joints[jointIndex]->enableAngularMotor(true, 20*diff, maxImpulse);
 }
+
+
 
 
 void RagdollDemo::displayCallback()

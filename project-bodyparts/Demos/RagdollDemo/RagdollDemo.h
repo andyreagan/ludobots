@@ -21,6 +21,7 @@ Written by: Marten Svanfeldt
 
 #include "GlutDemoApplication.h"
 #include "LinearMath/btAlignedObjectArray.h"
+#include "GLDebugDrawer.h"
 class btBroadphaseInterface;
 class btCollisionShape;
 class btOverlappingPairCache;
@@ -28,6 +29,7 @@ class btCollisionDispatcher;
 class btConstraintSolver;
 struct btCollisionAlgorithmCreateFunc;
 class btDefaultCollisionConfiguration;
+
 
 class RagdollDemo : public GlutDemoApplication
 {
@@ -73,8 +75,14 @@ class RagdollDemo : public GlutDemoApplication
 //    int upperLegCollidesWith = COL_UPPER_LEG;
 //    int bodyCollidesWith = COL_BODY;
 //    int landCollidesWith = COL_LAND;
-
+    
+    int IDs[10];
+    
 public:
+    
+    int touches[10];
+    
+    btVector3 touchPoints[10];
     
 	void initPhysics();
 
@@ -136,6 +144,23 @@ public:
     
     void ActuateJoint2(int jointIndex, double desiredAngle,
                       double timeStep);
+    
+    // bool myContactProcessedCallback(btManifoldPoint& cp,
+    //                                 void* body0, void* body1);
+    
+    virtual void renderme() {
+        extern GLDebugDrawer gDebugDrawer;
+        // Call the parent method.
+        GlutDemoApplication::renderme();
+        // Make a circle with a 0.9 radius at (0,0,0)
+        // with RGB color (1,0,0).
+        // gDebugDrawer.drawSphere(btVector3(0.,0.,0.), 0.9, btVector3(1., 0., 0.));
+        for (int i=0; i<10; i++) {
+            if (touches[i]) {
+                gDebugDrawer.drawSphere(touchPoints[i], 0.2, btVector3(1., 0., 0.));
+            }
+        }
+    }
 };
 
 
