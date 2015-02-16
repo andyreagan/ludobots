@@ -242,7 +242,7 @@
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = OpenGLSupport_xcode4_x64_release;
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx10.10;
 				VALID_ARCHS = "x86_64 i386";
 			};
 			name = "Release Native 64-bit";
@@ -318,7 +318,7 @@
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = OpenGLSupport_xcode4;
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx10.10;
 				VALID_ARCHS = "x86_64 i386";
 			};
 			name = "Release Native 32-bit";
@@ -337,7 +337,7 @@
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = OpenGLSupport_xcode4_debug;
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx10.10;
 				VALID_ARCHS = "x86_64 i386";
 			};
 			name = "Debug Native 32-bit";
@@ -356,7 +356,7 @@
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = OpenGLSupport_xcode4_x64_debug;
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx10.10;
 				VALID_ARCHS = "x86_64 i386";
 			};
 			name = "Debug Native 64-bit";
