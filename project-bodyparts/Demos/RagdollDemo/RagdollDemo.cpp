@@ -550,6 +550,29 @@ void RagdollDemo::exitPhysics()
 }
 
 
+void RagdollDemo::DeleteObject( int index ) {
+    m_dynamicsWorld->removeRigidBody( body[index] );
+    delete body[index];
+    delete geom[index];
+}
+
+void RagdollDemo::DestroyHinge( int index ) {
+    m_dynamicsWorld->removeConstraint( joints[index] );
+    delete joints[index];
+}
+
+btVector3 RagdollDemo::PointWorldToLocal(int index, btVector3 &p) {
+    btTransform local1 = body[index]->getCenterOfMassTransform().inverse();
+    return local1 * p;
+}
+
+btVector3 RagdollDemo::AxisWorldToLocal(int index, btVector3 &a) {
+    btTransform local1 = body[index]->getCenterOfMassTransform().inverse();
+    btVector3 zero(0,0,0);
+    local1.setOrigin(zero);
+    return local1 * a;
+}
+
 
 
 
