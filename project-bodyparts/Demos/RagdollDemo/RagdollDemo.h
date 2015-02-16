@@ -57,6 +57,14 @@ class RagdollDemo : public GlutDemoApplication
     
     double offsets[8];
     
+    double weights[4][8];
+    
+    int bodyLookup[4];
+    
+    long timeStep;
+    
+    long timeStepExit;
+    
 //    // need to do some collision masking
 //    // and I'm going to ignore when body parts collide with one another
 //    // reference:
@@ -138,11 +146,13 @@ public:
         // Make a circle with a 0.9 radius at (0,0,0)
         // with RGB color (1,0,0).
         // gDebugDrawer.drawSphere(btVector3(0.,0.,0.), 0.9, btVector3(1., 0., 0.));
-        for (int i=0; i<10; i++) {
-            if (touches[i]) {
-                gDebugDrawer.drawSphere(touchPoints[i], 0.2, btVector3(1., 0., 0.));
-            }
-        }
+        
+        // draw the red circles at contact points
+//        for (int i=0; i<10; i++) {
+//            if (touches[i]) {
+//                gDebugDrawer.drawSphere(touchPoints[i], 0.2, btVector3(1., 0., 0.));
+//            }
+//        }
     }
 };
 

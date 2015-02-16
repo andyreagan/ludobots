@@ -166,6 +166,50 @@ void RagdollDemo::initPhysics()
         touches[i] = 0;
     }
     
+    FILE *ifp;
+
+    char *mode = "r";
+    
+    ifp = fopen("/Users/andyreagan/class/2015/CSYS295evolutionary-robotics/core10/weights.csv", mode);
+    
+    if (ifp == NULL) {
+        fprintf(stderr, "Can't open input file /Users/andyreagan/class/2015/CSYS295evolutionary-robotics/core10/weights.csv!\n");
+        exit(1);
+    }
+    
+    double w1;
+    double w2;
+    double w3;
+    double w4;
+    double w5;
+    double w6;
+    double w7;
+    double w8;
+    int lines = 0;
+    
+    while (fscanf(ifp, "%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf\n",&w1,&w2,&w3,&w4,&w5,&w6,&w7,&w8) != EOF) {
+        printf("%f,%f,%f,%f,%f,%f,%f,%f\n",w1,w2,w3,w4,w5,w6,w7,w8);
+        weights[lines][0] = w1;
+        weights[lines][1] = w2;
+        weights[lines][2] = w3;
+        weights[lines][3] = w4;
+        weights[lines][4] = w5;
+        weights[lines][5] = w6;
+        weights[lines][6] = w7;
+        weights[lines][7] = w8;
+        lines++;
+    }
+    
+    fclose(ifp);
+    
+    bodyLookup[0] = 3;
+    bodyLookup[1] = 4;
+    bodyLookup[2] = 7;
+    bodyLookup[3] = 8;
+    
+    timeStep = 0;
+    timeStepExit = 0;
+    
 	// Setup the basic world
 
 	setTexturing(true);
@@ -220,13 +264,19 @@ void RagdollDemo::initPhysics()
     // and has size 1,.2,1
     CreateBox(0, 0., 1.1, 0., 0.5, .1, 0.5);
     
+    // right upper leg
     CreateCylinder(1, 1., 1.1, 0., .1, 0.5, 'x');
+    // left upper leg
     CreateCylinder(2, -1., 1.1, 0., .1, 0.5, 'x');
+    // right lower leg
     CreateCylinder(3, 1.5, 0.6, 0.0, .1, 0.5, 'y');
+    // left lower leg
     CreateCylinder(4, -1.5, 0.6, 0.0, .1, 0.5, 'y');
     CreateCylinder(5, 0., 1.1, 1., .1, 0.5, 'z');
     CreateCylinder(6, 0., 1.1, -1., .1, 0.5, 'z');
+    // back lower leg
     CreateCylinder(7, 0., .6, 1.5, .1, 0.5, 'y');
+    // front lower leg
     CreateCylinder(8, 0., .6, -1.5, .1, 0.5, 'y');
     
     // trying to get these offsets right....not so easy!
@@ -258,7 +308,7 @@ void RagdollDemo::initPhysics()
     // close leg body
     CreateHinge(7,0,6,0.,1.1,-0.5,-1,0,0,(-45.+offsets[7])*3.14159/180., (45.+offsets[7])*3.14159/180.);
     
-    pause = !pause;
+    // pause = !pause;
     clientResetScene();
 }
 
@@ -272,11 +322,24 @@ void RagdollDemo::clientMoveAndDisplay()
 	float minFPS = 1000000.f/60.f;
 	if (ms > minFPS)
 		ms = minFPS;
+    
+    timeStepExit++;
+
+
 
 	if (m_dynamicsWorld)
 	{
         if (!pause || (pause && oneStep)) {
             
+            // set touches vector to zero
+            for (int i=0; i<10; i++) {
+                touches[i] = 0;
+            }
+            
+            m_dynamicsWorld->stepSimulation(ms / 1000000.f);
+            oneStep = !oneStep;
+            
+            // try to move the joints to a fixed position
 //            double knees,bodyj;
 //            knees = 45;
 //            bodyj = 45;
@@ -289,22 +352,32 @@ void RagdollDemo::clientMoveAndDisplay()
 //            ActuateJoint2(6, bodyj, ms / 1000000.f);
 //            ActuateJoint2(7, bodyj, ms / 1000000.f);
             
-            ActuateJoint2(0, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
-            ActuateJoint2(1, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
-            ActuateJoint2(2, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
-            ActuateJoint2(3, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
-            ActuateJoint2(4, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
-            ActuateJoint2(5, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
-            ActuateJoint2(6, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
-            ActuateJoint2(7, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+            // actuate the joints randomly
+//            ActuateJoint2(0, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+//            ActuateJoint2(1, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+//            ActuateJoint2(2, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+//            ActuateJoint2(3, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+//            ActuateJoint2(4, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+//            ActuateJoint2(5, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+//            ActuateJoint2(6, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+//            ActuateJoint2(7, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
             
-            
-            for (int i=0; i<10; i++) {
-                touches[i] = 0;
+            // I seem to be able to update every timestep
+            if ( timeStep%1==0 ) {
+                for (int i=0; i<8; i++) {
+                    double motorCommand = 0.0;
+                
+                    for (int j=0; j<4; j++) {
+                        motorCommand = motorCommand + weights[j][i]*touches[bodyLookup[j]];
+                    }
+                
+                    motorCommand = tanh(motorCommand);
+                    motorCommand = motorCommand*45;
+                
+                    ActuateJoint2(i, motorCommand, ms / 1000000.f);
+                }
             }
-            
-            m_dynamicsWorld->stepSimulation(ms / 1000000.f);
-            oneStep = !oneStep;
+            timeStep++;
             
             for (int i=0; i<10; i++) {
                  printf("%d", touches[i]);
@@ -315,12 +388,35 @@ void RagdollDemo::clientMoveAndDisplay()
 		//optional but useful: debug drawing
 		// m_dynamicsWorld->debugDrawWorld();
 	}
+    
+    if ( timeStepExit==1000 ) {
+        Save_Position(body[0]);
+        exit(0);
+    }
 
-	renderme(); 
+	renderme();
 
 	glFlush();
 
 	glutSwapBuffers();
+}
+
+void RagdollDemo::Save_Position(btRigidBody *bodypart) {
+    btVector3 pos;
+    pos = bodypart->getCenterOfMassPosition();
+    printf("%f,%f,%f\n",pos[0],pos[1],pos[2]);
+        FILE *ofp;
+        char outputFilename[] = "/Users/andyreagan/class/2015/CSYS295evolutionary-robotics/core10/distance.csv";
+        ofp = fopen(outputFilename, "w");
+    
+        if (ofp == NULL) {
+            fprintf(stderr, "Can't open output file %s!\n",
+                    outputFilename);
+            exit(1);
+        }
+    
+    fprintf(ofp,"%f,%f,%f\n",pos[0],pos[1],pos[2]);
+    fclose(ofp);
 }
 
 void RagdollDemo::CreateBox( int index, double x, double y, double z, double length, double height, double width)
