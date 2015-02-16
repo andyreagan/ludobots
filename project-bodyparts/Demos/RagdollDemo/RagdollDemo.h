@@ -130,6 +130,8 @@ public:
     
     btVector3 AxisWorldToLocal(int index, btVector3 &a);
     
+    void Save_Position(btRigidBody *bodypart);
+    
     void ActuateJoint(int jointIndex, double desiredAngle,
                       double jointOffset, double timeStep);
     
