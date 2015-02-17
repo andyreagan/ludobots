@@ -1,7 +1,7 @@
 # load previous module
 # this may not be the best method once I have 10 modules
 import sys
-sys.path.append('/Users/andyreagan/class/2015/CSYS295/')
+sys.path.append('/Users/andyreagan/class/2015/CSYS295evolutionary-robotics/')
 from core01.hillclimber import *
 from core02.ANN import *
 

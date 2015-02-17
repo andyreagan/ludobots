@@ -19,18 +19,34 @@ def Core01Fitness(matrix,match):
 def Evolve(parent,runtime,testFun,fitnessFun,match,prange):
     fit = np.zeros(runtime)
     genes = np.zeros([np.shape(parent)[0],np.shape(parent)[1],runtime])
+    # since the testFun has gotten costly, don't run each time
+    runparent = True
     for currentGeneration in range(runtime):
-        perf = testFun(parent)
-        parentFitness = fitnessFun(perf,match)
+        # only test the performance of the parent if we need to
+        if runparent:
+            # print('running parent')
+            perf = testFun(parent)
+            parentFitness = fitnessFun(perf,match)
         fit[currentGeneration] = parentFitness
         genes[:,:,currentGeneration] = parent
         child = MatrixPerturb(parent, .05, prange)
         # now run the child
-        perf = testFun(child)
-        childFitness = fitnessFun(perf,match)
+        # print('running child')
+        childperf = testFun(child)
+        childFitness = fitnessFun(childperf,match)
+
+        print('{0}\t{1}\t{2}'.format(currentGeneration,perf,childperf))
+        # print('{0}\t{1}\t{2}\t{3}\t{4}\n'.format(currentGeneration,perf,childperf,parentFitness,childFitness))
+
+        # if we accept the child as the new parent
         if childFitness > parentFitness:
+            # print('new parent accepted')
+            perf = childperf
             parent = child
             parentFitness = childFitness
+            runparent = False
+        else:
+            runparent = False 
 
     return fit,genes
 

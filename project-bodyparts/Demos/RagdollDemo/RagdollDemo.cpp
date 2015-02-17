@@ -188,7 +188,7 @@ void RagdollDemo::initPhysics()
     int lines = 0;
     
     while (fscanf(ifp, "%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf\n",&w1,&w2,&w3,&w4,&w5,&w6,&w7,&w8) != EOF) {
-        printf("%f,%f,%f,%f,%f,%f,%f,%f\n",w1,w2,w3,w4,w5,w6,w7,w8);
+        // printf("%f,%f,%f,%f,%f,%f,%f,%f\n",w1,w2,w3,w4,w5,w6,w7,w8);
         weights[lines][0] = w1;
         weights[lines][1] = w2;
         weights[lines][2] = w3;
@@ -260,24 +260,26 @@ void RagdollDemo::initPhysics()
     // the moving it up to 0,.2,0 gets it out of the ground
     // so the thing must have size 2,.4,2
     
+    double verticalOffset = 0.0;
+    
     // this starts at exactly 1 off the ground
     // and has size 1,.2,1
-    CreateBox(0, 0., 1.1, 0., 0.5, .1, 0.5);
+    CreateBox(0, 0., 1.+verticalOffset, 0., 0.5, .1, 0.5);
     
     // right upper leg
-    CreateCylinder(1, 1., 1.1, 0., .1, 0.5, 'x');
+    CreateCylinder(1, 1., 1.+verticalOffset, 0., .1, 0.5, 'x');
     // left upper leg
-    CreateCylinder(2, -1., 1.1, 0., .1, 0.5, 'x');
+    CreateCylinder(2, -1., 1.+verticalOffset, 0., .1, 0.5, 'x');
     // right lower leg
-    CreateCylinder(3, 1.5, 0.6, 0.0, .1, 0.5, 'y');
+    CreateCylinder(3, 1.5, 0.5+verticalOffset, 0.0, .1, 0.5, 'y');
     // left lower leg
-    CreateCylinder(4, -1.5, 0.6, 0.0, .1, 0.5, 'y');
-    CreateCylinder(5, 0., 1.1, 1., .1, 0.5, 'z');
-    CreateCylinder(6, 0., 1.1, -1., .1, 0.5, 'z');
+    CreateCylinder(4, -1.5, 0.5+verticalOffset, 0.0, .1, 0.5, 'y');
+    CreateCylinder(5, 0., 1.+verticalOffset, 1., .1, 0.5, 'z');
+    CreateCylinder(6, 0., 1.+verticalOffset, -1., .1, 0.5, 'z');
     // back lower leg
-    CreateCylinder(7, 0., .6, 1.5, .1, 0.5, 'y');
+    CreateCylinder(7, 0., 0.5+verticalOffset, 1.5, .1, 0.5, 'y');
     // front lower leg
-    CreateCylinder(8, 0., .6, -1.5, .1, 0.5, 'y');
+    CreateCylinder(8, 0., 0.5+verticalOffset, -1.5, .1, 0.5, 'y');
     
     // trying to get these offsets right....not so easy!
     
@@ -291,22 +293,22 @@ void RagdollDemo::initPhysics()
     offsets[7] = 0;
     
     // left leg knee
-    CreateHinge(0,1,3,1.5,1.1,0.0,0,0,-1,(-45.+offsets[0])*3.14159/180., (45.+offsets[0])*3.14159/180.);
+    CreateHinge(0,1,3,1.5,1.+verticalOffset,0.0,0,0,-1,(-45.+offsets[0])*3.14159/180., (45.+offsets[0])*3.14159/180.);
     // right leg knee
-    CreateHinge(1,2,4,-1.5,1.1,0.0,0,0,1,(-45.+offsets[1])*3.14159/180., (45.+offsets[1])*3.14159/180.);
+    CreateHinge(1,2,4,-1.5,1.+verticalOffset,0.0,0,0,1,(-45.+offsets[1])*3.14159/180., (45.+offsets[1])*3.14159/180.);
     // far leg knee
-    CreateHinge(2,5,7,0,1.1,1.5,1,0,0,(-45.+offsets[2])*3.14159/180., (45.+offsets[2])*3.14159/180.);
+    CreateHinge(2,5,7,0,1.+verticalOffset,1.5,1,0,0,(-45.+offsets[2])*3.14159/180., (45.+offsets[2])*3.14159/180.);
     // close leg knee
-    CreateHinge(3,6,8,0,1.1,-1.5,-1,0,0,(-45.+offsets[3])*3.14159/180., (45.+offsets[3])*3.14159/180.);
+    CreateHinge(3,6,8,0,1.+verticalOffset,-1.5,-1,0,0,(-45.+offsets[3])*3.14159/180., (45.+offsets[3])*3.14159/180.);
 
     // left leg body
-    CreateHinge(4,0,1,0.5,1.1,0.0,0,0,-1,(-45.+offsets[4])*3.14159/180., (45.+offsets[4])*3.14159/180.);
+    CreateHinge(4,0,1,0.5,1.+verticalOffset,0.0,0,0,-1,(-45.+offsets[4])*3.14159/180., (45.+offsets[4])*3.14159/180.);
     // right leg body
-    CreateHinge(5,0,2,-0.5,1.1,0.0,0,0,1,(-45.+offsets[5])*3.14159/180., (45.+offsets[5])*3.14159/180.);
+    CreateHinge(5,0,2,-0.5,1.+verticalOffset,0.0,0,0,1,(-45.+offsets[5])*3.14159/180., (45.+offsets[5])*3.14159/180.);
     // far leg body
-    CreateHinge(6,0,5,0.,1.1,0.5,1,0,0,(-45.+offsets[6])*3.14159/180., (45.+offsets[6])*3.14159/180.);
+    CreateHinge(6,0,5,0.,1.+verticalOffset,0.5,1,0,0,(-45.+offsets[6])*3.14159/180., (45.+offsets[6])*3.14159/180.);
     // close leg body
-    CreateHinge(7,0,6,0.,1.1,-0.5,-1,0,0,(-45.+offsets[7])*3.14159/180., (45.+offsets[7])*3.14159/180.);
+    CreateHinge(7,0,6,0.,1.+verticalOffset,-0.5,-1,0,0,(-45.+offsets[7])*3.14159/180., (45.+offsets[7])*3.14159/180.);
     
     // pause = !pause;
     clientResetScene();
@@ -336,7 +338,15 @@ void RagdollDemo::clientMoveAndDisplay()
                 touches[i] = 0;
             }
             
+            // this makes it run deterministically, buuuut it behaves really weird
+//            while ( (touches[bodyLookup[0]]==0) &&
+//                   (touches[bodyLookup[1]]==0) &&
+//                   (touches[bodyLookup[2]]==0) &&
+//                   (touches[bodyLookup[3]]==0) )
+//                m_dynamicsWorld->stepSimulation(ms / 1000000.f);
+            
             m_dynamicsWorld->stepSimulation(ms / 1000000.f);
+            
             oneStep = !oneStep;
             
             // try to move the joints to a fixed position
@@ -379,10 +389,10 @@ void RagdollDemo::clientMoveAndDisplay()
             }
             timeStep++;
             
-            for (int i=0; i<10; i++) {
-                 printf("%d", touches[i]);
-            }
-            printf("\n");
+//            for (int i=0; i<10; i++) {
+//                 printf("%d", touches[i]);
+//            }
+//            printf("\n");
            
         }
 		//optional but useful: debug drawing
@@ -404,7 +414,7 @@ void RagdollDemo::clientMoveAndDisplay()
 void RagdollDemo::Save_Position(btRigidBody *bodypart) {
     btVector3 pos;
     pos = bodypart->getCenterOfMassPosition();
-    printf("%f,%f,%f\n",pos[0],pos[1],pos[2]);
+    // printf("%f,%f,%f\n",pos[0],pos[1],pos[2]);
         FILE *ofp;
         char outputFilename[] = "/Users/andyreagan/class/2015/CSYS295evolutionary-robotics/core10/distance.csv";
         ofp = fopen(outputFilename, "w");
