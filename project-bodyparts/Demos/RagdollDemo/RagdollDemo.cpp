@@ -321,7 +321,8 @@ void RagdollDemo::clientMoveAndDisplay()
 	//simple dynamics world doesn't handle fixed-time-stepping
 	float ms = getDeltaTimeMicroseconds();
 
-	float minFPS = 1000000.f/60.f;
+	//float minFPS = 1000000.f/60.f;
+    float minFPS = 90000.f/60.f;
 	if (ms > minFPS)
 		ms = minFPS;
     
@@ -345,7 +346,7 @@ void RagdollDemo::clientMoveAndDisplay()
 //                   (touches[bodyLookup[3]]==0) )
 //                m_dynamicsWorld->stepSimulation(ms / 1000000.f);
             
-            m_dynamicsWorld->stepSimulation(ms / 1000000.f);
+            m_dynamicsWorld->stepSimulation(ms / 90000.f);
             
             oneStep = !oneStep;
             
@@ -384,7 +385,7 @@ void RagdollDemo::clientMoveAndDisplay()
                     motorCommand = tanh(motorCommand);
                     motorCommand = motorCommand*45;
                 
-                    ActuateJoint2(i, motorCommand, ms / 1000000.f);
+                    ActuateJoint2(i, motorCommand, ms / 90000.f);
                 }
             }
             timeStep++;
@@ -399,7 +400,7 @@ void RagdollDemo::clientMoveAndDisplay()
 		// m_dynamicsWorld->debugDrawWorld();
 	}
     
-    if ( timeStepExit==1000 ) {
+    if ( timeStepExit==100 ) {
         Save_Position(body[0]);
         exit(0);
     }
