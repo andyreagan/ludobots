@@ -101,6 +101,8 @@ public:
 	{
 		exitPhysics();
 	}
+    
+    virtual void clientMove();
 
 	virtual void clientMoveAndDisplay();
 

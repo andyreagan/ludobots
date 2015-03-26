@@ -316,22 +316,33 @@ void RagdollDemo::initPhysics()
 
 void RagdollDemo::clientMoveAndDisplay()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	//simple dynamics world doesn't handle fixed-time-stepping
-	float ms = getDeltaTimeMicroseconds();
+    clientMove();
+    
+	renderme();
 
-	//float minFPS = 1000000.f/60.f;
-    float minFPS = 90000.f/60.f;
-	if (ms > minFPS)
-		ms = minFPS;
+	glFlush();
+
+	glutSwapBuffers();
+}
+
+void RagdollDemo::clientMove()
+{
+    //simple dynamics world doesn't handle fixed-time-stepping
+    // float ms = getDeltaTimeMicroseconds();
+    
+    //float minFPS = 1000000.f/60.f;
+    //float minFPS = 90000.f/60.f;
+    //if (ms > minFPS)
+    //	ms = minFPS;
     
     timeStepExit++;
-
-
-
-	if (m_dynamicsWorld)
-	{
+    
+    
+    
+    if (m_dynamicsWorld)
+    {
         if (!pause || (pause && oneStep)) {
             
             // set touches vector to zero
@@ -340,77 +351,74 @@ void RagdollDemo::clientMoveAndDisplay()
             }
             
             // this makes it run deterministically, buuuut it behaves really weird
-//            while ( (touches[bodyLookup[0]]==0) &&
-//                   (touches[bodyLookup[1]]==0) &&
-//                   (touches[bodyLookup[2]]==0) &&
-//                   (touches[bodyLookup[3]]==0) )
-//                m_dynamicsWorld->stepSimulation(ms / 1000000.f);
+            //            while ( (touches[bodyLookup[0]]==0) &&
+            //                   (touches[bodyLookup[1]]==0) &&
+            //                   (touches[bodyLookup[2]]==0) &&
+            //                   (touches[bodyLookup[3]]==0) )
+            //                m_dynamicsWorld->stepSimulation(ms / 1000000.f);
             
-            m_dynamicsWorld->stepSimulation(ms / 90000.f);
+            // m_dynamicsWorld->stepSimulation(ms / 90000.f);
+            m_dynamicsWorld->stepSimulation(0.1);
             
             oneStep = !oneStep;
             
             // try to move the joints to a fixed position
-//            double knees,bodyj;
-//            knees = 45;
-//            bodyj = 45;
-//            ActuateJoint2(0, knees, ms / 1000000.f);
-//            ActuateJoint2(1, knees, ms / 1000000.f);
-//            ActuateJoint2(2, knees, ms / 1000000.f);
-//            ActuateJoint2(3, knees, ms / 1000000.f);
-//            ActuateJoint2(4, bodyj, ms / 1000000.f);
-//            ActuateJoint2(5, bodyj, ms / 1000000.f);
-//            ActuateJoint2(6, bodyj, ms / 1000000.f);
-//            ActuateJoint2(7, bodyj, ms / 1000000.f);
+            //            double knees,bodyj;
+            //            knees = 45;
+            //            bodyj = 45;
+            //            ActuateJoint2(0, knees, ms / 1000000.f);
+            //            ActuateJoint2(1, knees, ms / 1000000.f);
+            //            ActuateJoint2(2, knees, ms / 1000000.f);
+            //            ActuateJoint2(3, knees, ms / 1000000.f);
+            //            ActuateJoint2(4, bodyj, ms / 1000000.f);
+            //            ActuateJoint2(5, bodyj, ms / 1000000.f);
+            //            ActuateJoint2(6, bodyj, ms / 1000000.f);
+            //            ActuateJoint2(7, bodyj, ms / 1000000.f);
             
             // actuate the joints randomly
-//            ActuateJoint2(0, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
-//            ActuateJoint2(1, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
-//            ActuateJoint2(2, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
-//            ActuateJoint2(3, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
-//            ActuateJoint2(4, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
-//            ActuateJoint2(5, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
-//            ActuateJoint2(6, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
-//            ActuateJoint2(7, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+            //            ActuateJoint2(0, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+            //            ActuateJoint2(1, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+            //            ActuateJoint2(2, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+            //            ActuateJoint2(3, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+            //            ActuateJoint2(4, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+            //            ActuateJoint2(5, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+            //            ActuateJoint2(6, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
+            //            ActuateJoint2(7, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
             
             // I seem to be able to update every timestep
             if ( timeStep%1==0 ) {
                 for (int i=0; i<8; i++) {
                     double motorCommand = 0.0;
-                
+                    
                     for (int j=0; j<4; j++) {
                         motorCommand = motorCommand + weights[j][i]*touches[bodyLookup[j]];
                     }
-                
+                    
                     motorCommand = tanh(motorCommand);
                     motorCommand = motorCommand*45;
-                
-                    ActuateJoint2(i, motorCommand, ms / 90000.f);
+                    
+                    // ActuateJoint2(i, motorCommand, ms / 90000.f);
+                    ActuateJoint2(i, motorCommand, 0.1);
                 }
             }
             timeStep++;
             
-//            for (int i=0; i<10; i++) {
-//                 printf("%d", touches[i]);
-//            }
-//            printf("\n");
-           
+            //            for (int i=0; i<10; i++) {
+            //                 printf("%d", touches[i]);
+            //            }
+            //            printf("\n");
+            
         }
-		//optional but useful: debug drawing
-		// m_dynamicsWorld->debugDrawWorld();
-	}
+        //optional but useful: debug drawing
+        // m_dynamicsWorld->debugDrawWorld();
+    }
     
-    if ( timeStepExit==100 ) {
+    if ( timeStepExit==1000 ) {
         Save_Position(body[0]);
         exit(0);
     }
-
-	renderme();
-
-	glFlush();
-
-	glutSwapBuffers();
 }
+
 
 void RagdollDemo::Save_Position(btRigidBody *bodypart) {
     btVector3 pos;
@@ -426,8 +434,9 @@ void RagdollDemo::Save_Position(btRigidBody *bodypart) {
             exit(1);
         }
     
-    fprintf(ofp,"%f,%f,%f\n",pos[0],pos[1],pos[2]);
+    fprintf(ofp,"%f,%f,%f",pos[0],pos[1],pos[2]);
     fclose(ofp);
+    fprintf(stdout,"%f,%f,%f",pos[0],pos[1],pos[2]);
 }
 
 void RagdollDemo::CreateBox( int index, double x, double y, double z, double length, double height, double width)

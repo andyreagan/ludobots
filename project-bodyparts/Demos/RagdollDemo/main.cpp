@@ -14,7 +14,7 @@ subject to the following restrictions:
 */
 
 #include "RagdollDemo.h"
-#include "GlutStuff.h"
+#include "GlutStuff.h"  
 #include "GLDebugDrawer.h"
 #include "btBulletDynamicsCommon.h"
 
@@ -22,10 +22,31 @@ GLDebugDrawer gDebugDrawer;
 
 int main(int argc,char* argv[])
 {
-        RagdollDemo demoApp;    
-
-        demoApp.initPhysics();
-		demoApp.getDynamicsWorld()->setDebugDrawer(&gDebugDrawer);
+    RagdollDemo demoApp;
     
-        return glutmain(argc, argv,640,480,"Bullet Physics Demo by Andy Reagan. http://bulletphysics.com",&demoApp);
+    demoApp.initPhysics();
+    demoApp.getDynamicsWorld()->setDebugDrawer(&gDebugDrawer);
+    
+    // printf("argc = %d\n\n",argc);
+    
+    if ( argc > 1 ) {
+//        printf("argv[0] = %s\n",argv[0]);
+//        printf("\n");
+//        printf("argv[1] = %s\n",argv[1]);
+//        printf("\n");
+        if ( strcmp(argv[1],"-headless") == 0) {
+        // if ( argv[1] == "-headless" ) {
+            // fprintf(stdout,"running headless\n\n");
+            while (1) demoApp.clientMove();
+            return 0;
+        }
+        else {
+            printf("not headless, running with display\n\n");
+            return glutmain(argc,argv,640,480,"Bullet Physics Demo by Andy Reagan. http://bulletphysics.com",&demoApp);
+        }
+    }
+    else {
+        // printf("less than 1 argc, running with display\n\n");
+        return glutmain(argc,argv,640,480,"Bullet Physics Demo by Andy Reagan. http://bulletphysics.com",&demoApp);
+    }
 }
