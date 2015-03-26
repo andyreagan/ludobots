@@ -17,6 +17,8 @@ subject to the following restrictions:
 #include "GlutStuff.h"  
 #include "GLDebugDrawer.h"
 #include "btBulletDynamicsCommon.h"
+#include <iostream>
+#include <string.h>
 
 GLDebugDrawer gDebugDrawer;
 
@@ -27,26 +29,74 @@ int main(int argc,char* argv[])
     demoApp.initPhysics();
     demoApp.getDynamicsWorld()->setDebugDrawer(&gDebugDrawer);
     
+    // number of input arguments:
     // printf("argc = %d\n\n",argc);
+
+    // don't use input flag...
+    bool inputflag = false;
+    // keep track of headless mode
+    bool headless = false;
+    // keep track of whether to open them from the file
+    bool synapsesLoaded = false;
     
-    if ( argc > 1 ) {
-//        printf("argv[0] = %s\n",argv[0]);
-//        printf("\n");
-//        printf("argv[1] = %s\n",argv[1]);
-//        printf("\n");
-        if ( strcmp(argv[1],"-headless") == 0) {
-        // if ( argv[1] == "-headless" ) {
-            // fprintf(stdout,"running headless\n\n");
-            while (1) demoApp.clientMove();
-            return 0;
-        }
-        else {
-            printf("not headless, running with display\n\n");
-            return glutmain(argc,argv,640,480,"Bullet Physics Demo by Andy Reagan. http://bulletphysics.com",&demoApp);
+    // okay, chars are a huge pain
+    // use standard lib string
+    std::string dash = "--";
+    std::string input;
+    
+    for (int i=0; i<argc; i++) {
+        // check the count
+        // fprintf(stdout,"i = %d\n",i);
+        input = argv[i];
+        // print the converted input
+        // std::cout << input << "\n";
+        // std::cout << input.substr(0,2) << "\n";
+        if (input.substr(0,2) == "--") {
+            inputflag = true;
+            if (input.substr(2) == "headless") {
+                headless = true;
+            }
+            if (input.substr(2) == "streamoutput") {
+                demoApp.streamOutput = true;
+            }
+            if (input.substr(2) == "synapses") {
+                int j = 0;
+                // while (!inputflag) {
+                // we know there are 32...
+                while (j<32) {
+                    // jump through i....yay c++!
+                    i++;
+                    // check the input...
+                    // input = argv[i];
+                    demoApp.weightsLinear[j] = atof(argv[i]);
+                    // fprintf(stdout,"%f\n",demoApp.weightsLinear[j]);
+                    j++;
+                }
+                // convert the linear weights into a matrix
+                // could do this straight from stdin, but oh well
+                for (int j=0; j<32; j++) {
+                    int ji = floor(j/8);
+                    int jj = j-ji*8;
+                    // check that these indices are correct:
+                    // std::cout << j << "\n";
+                    // std::cout << ji << "," << jj << "\n";
+                    demoApp.weights[ji][jj] = demoApp.weightsLinear[j];
+                }
+                // if all of that worked:
+                synapsesLoaded = true;
+            }
         }
     }
+    
+    if ( !synapsesLoaded ) {
+        demoApp.loadSynapsesFromFile();
+    }
+    
+    if ( headless ) {
+        while (1) demoApp.clientMove();
+        return 0;
+    }
     else {
-        // printf("less than 1 argc, running with display\n\n");
         return glutmain(argc,argv,640,480,"Bullet Physics Demo by Andy Reagan. http://bulletphysics.com",&demoApp);
     }
 }

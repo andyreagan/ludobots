@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../Demos/RagdollDemo/RagdollDemo.cpp"
-            timestampString = "444677248.266702"
+            timestampString = "449101622.174195"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
             landmarkName = "RagdollDemo::initPhysics()"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,29 +26,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../Demos/RagdollDemo/RagdollDemo.cpp"
-            timestampString = "444677248.266702"
+            timestampString = "449101622.174195"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
+            startingLineNumber = "215"
+            endingLineNumber = "215"
             landmarkName = "RagdollDemo::initPhysics()"
             landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../Demos/RagdollDemo/main.cpp"
-            timestampString = "449073920.035118"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "main(int argc,char* argv[])"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

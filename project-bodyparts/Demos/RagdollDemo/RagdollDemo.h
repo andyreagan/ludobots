@@ -58,7 +58,7 @@ class RagdollDemo : public GlutDemoApplication
     
     double offsets[8];
     
-    double weights[4][8];
+    
     
     int bodyLookup[4];
     
@@ -88,6 +88,16 @@ class RagdollDemo : public GlutDemoApplication
     int IDs[10];
     
 public:
+    
+    // make public so I can fill from stdin
+    double weights[4][8];
+    
+    // to store the weights as they come in
+    // ...could just go straigt into weights
+    double weightsLinear[32];
+    
+    // whether to stream the two output neurons to stdout
+    bool streamOutput = false;
     
     int touches[10];
     
@@ -134,6 +144,8 @@ public:
     btVector3 AxisWorldToLocal(int index, btVector3 &a);
     
     void Save_Position(btRigidBody *bodypart);
+    
+    void loadSynapsesFromFile();
     
     void ActuateJoint(int jointIndex, double desiredAngle,
                       double jointOffset, double timeStep);

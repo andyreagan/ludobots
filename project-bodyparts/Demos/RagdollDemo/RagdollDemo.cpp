@@ -155,19 +155,9 @@ bool myContactProcessedCallback(btManifoldPoint& cp,
     return false;
 }
 
-
-void RagdollDemo::initPhysics()
-{
-    
-    ragdollDemo = this;
-    gContactProcessedCallback = myContactProcessedCallback;
-    
-    for (int i=0; i<10; i++) {
-        touches[i] = 0;
-    }
+void RagdollDemo::loadSynapsesFromFile() {
     
     FILE *ifp;
-
     char *mode = "r";
     
     ifp = fopen("/Users/andyreagan/class/2015/CSYS295evolutionary-robotics/core10/weights.csv", mode);
@@ -201,6 +191,20 @@ void RagdollDemo::initPhysics()
     }
     
     fclose(ifp);
+}
+
+
+void RagdollDemo::initPhysics()
+{
+    
+    ragdollDemo = this;
+    gContactProcessedCallback = myContactProcessedCallback;
+    
+    for (int i=0; i<10; i++) {
+        touches[i] = 0;
+    }
+    
+
     
     bodyLookup[0] = 3;
     bodyLookup[1] = 4;
@@ -367,6 +371,10 @@ void RagdollDemo::clientMove()
                     motorCommand = motorCommand*45;
                     
                     ActuateJoint2(i, motorCommand, 0.1);
+                    
+                    if ( streamOutput ) {
+                        fprintf(stdout,"%d,%f\n",i,motorCommand);
+                    }
                 }
             }
             timeStep++;
