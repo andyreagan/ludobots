@@ -350,40 +350,9 @@ void RagdollDemo::clientMove()
                 touches[i] = 0;
             }
             
-            // this makes it run deterministically, buuuut it behaves really weird
-            //            while ( (touches[bodyLookup[0]]==0) &&
-            //                   (touches[bodyLookup[1]]==0) &&
-            //                   (touches[bodyLookup[2]]==0) &&
-            //                   (touches[bodyLookup[3]]==0) )
-            //                m_dynamicsWorld->stepSimulation(ms / 1000000.f);
-            
-            // m_dynamicsWorld->stepSimulation(ms / 90000.f);
             m_dynamicsWorld->stepSimulation(0.1);
             
             oneStep = !oneStep;
-            
-            // try to move the joints to a fixed position
-            //            double knees,bodyj;
-            //            knees = 45;
-            //            bodyj = 45;
-            //            ActuateJoint2(0, knees, ms / 1000000.f);
-            //            ActuateJoint2(1, knees, ms / 1000000.f);
-            //            ActuateJoint2(2, knees, ms / 1000000.f);
-            //            ActuateJoint2(3, knees, ms / 1000000.f);
-            //            ActuateJoint2(4, bodyj, ms / 1000000.f);
-            //            ActuateJoint2(5, bodyj, ms / 1000000.f);
-            //            ActuateJoint2(6, bodyj, ms / 1000000.f);
-            //            ActuateJoint2(7, bodyj, ms / 1000000.f);
-            
-            // actuate the joints randomly
-            //            ActuateJoint2(0, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
-            //            ActuateJoint2(1, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
-            //            ActuateJoint2(2, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
-            //            ActuateJoint2(3, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
-            //            ActuateJoint2(4, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
-            //            ActuateJoint2(5, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
-            //            ActuateJoint2(6, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
-            //            ActuateJoint2(7, (rand()/double(RAND_MAX))*90.-45, ms / 1000000.f);
             
             // I seem to be able to update every timestep
             if ( timeStep%1==0 ) {
@@ -397,20 +366,11 @@ void RagdollDemo::clientMove()
                     motorCommand = tanh(motorCommand);
                     motorCommand = motorCommand*45;
                     
-                    // ActuateJoint2(i, motorCommand, ms / 90000.f);
                     ActuateJoint2(i, motorCommand, 0.1);
                 }
             }
             timeStep++;
-            
-            //            for (int i=0; i<10; i++) {
-            //                 printf("%d", touches[i]);
-            //            }
-            //            printf("\n");
-            
         }
-        //optional but useful: debug drawing
-        // m_dynamicsWorld->debugDrawWorld();
     }
     
     if ( timeStepExit==1000 ) {
