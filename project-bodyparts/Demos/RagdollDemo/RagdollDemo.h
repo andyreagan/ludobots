@@ -46,21 +46,18 @@ class RagdollDemo : public GlutDemoApplication
 
 	btDefaultCollisionConfiguration* m_collisionConfiguration;
     
-    btRigidBody* body[9]; // one main body, 4x2 leg segments
+    btRigidBody* body[13]; // one main body, 4x2 leg segments, and 4 arm pieces
     
-    btCollisionShape* geom[9];
+    btCollisionShape* geom[13];
     
-    btHingeConstraint* joints[8];
+    btHingeConstraint* joints[12];
     
     bool oneStep;
+
     
-    bool pause;
+    double offsets[12];
     
-    double offsets[8];
-    
-    
-    
-    int bodyLookup[4];
+    int bodyLookup[6];
     
     long timeStep;
     
@@ -85,23 +82,25 @@ class RagdollDemo : public GlutDemoApplication
 //    int bodyCollidesWith = COL_BODY;
 //    int landCollidesWith = COL_LAND;
     
-    int IDs[10];
+    int IDs[14];
     
 public:
     
     // make public so I can fill from stdin
-    double weights[4][8];
+    double weights[6][14];
     
     // to store the weights as they come in
     // ...could just go straigt into weights
-    double weightsLinear[32];
+    double weightsLinear[84];
     
     // whether to stream the two output neurons to stdout
     bool streamOutput = false;
     
-    int touches[10];
+    bool pause = false;
     
-    btVector3 touchPoints[10];
+    int touches[14];
+    
+    btVector3 touchPoints[14];
     
 	void initPhysics();
 

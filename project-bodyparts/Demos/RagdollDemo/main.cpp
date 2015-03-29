@@ -47,6 +47,7 @@ int main(int argc,char* argv[])
     for (int i=0; i<argc; i++) {
         // check the count
         // fprintf(stdout,"i = %d\n",i);
+        // convert to a string
         input = argv[i];
         // print the converted input
         // std::cout << input << "\n";
@@ -56,6 +57,9 @@ int main(int argc,char* argv[])
             if (input.substr(2) == "headless") {
                 headless = true;
             }
+            if (input.substr(2) == "pause") {
+                demoApp.pause = true;
+            }
             if (input.substr(2) == "streamoutput") {
                 demoApp.streamOutput = true;
             }
@@ -63,7 +67,7 @@ int main(int argc,char* argv[])
                 int j = 0;
                 // while (!inputflag) {
                 // we know there are 32...
-                while (j<32) {
+                while (j<84) {
                     // jump through i....yay c++!
                     i++;
                     // check the input...
@@ -74,9 +78,9 @@ int main(int argc,char* argv[])
                 }
                 // convert the linear weights into a matrix
                 // could do this straight from stdin, but oh well
-                for (int j=0; j<32; j++) {
-                    int ji = floor(j/8);
-                    int jj = j-ji*8;
+                for (int j=0; j<84; j++) {
+                    int ji = floor(j/14);
+                    int jj = j-ji*14;
                     // check that these indices are correct:
                     // std::cout << j << "\n";
                     // std::cout << ji << "," << jj << "\n";

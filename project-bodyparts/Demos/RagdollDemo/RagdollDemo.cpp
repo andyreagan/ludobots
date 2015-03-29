@@ -200,7 +200,7 @@ void RagdollDemo::initPhysics()
     ragdollDemo = this;
     gContactProcessedCallback = myContactProcessedCallback;
     
-    for (int i=0; i<10; i++) {
+    for (int i=0; i<14; i++) {
         touches[i] = 0;
     }
     
@@ -210,6 +210,9 @@ void RagdollDemo::initPhysics()
     bodyLookup[1] = 4;
     bodyLookup[2] = 7;
     bodyLookup[3] = 8;
+    // the body parts for which we care about touches
+    bodyLookup[4] = 11;
+    bodyLookup[5] = 12;
     
     timeStep = 0;
     timeStepExit = 0;
@@ -255,7 +258,7 @@ void RagdollDemo::initPhysics()
     // startOffset.setValue(-1,0.5,0);
 	// spawnRagdoll(startOffset);
     
-    for (int i=0; i<10; i++) {
+    for (int i=0; i<14; i++) {
         IDs[i] = i;
     }
     
@@ -285,6 +288,20 @@ void RagdollDemo::initPhysics()
     // front lower leg
     CreateCylinder(8, 0., 0.5+verticalOffset, -1.5, .1, 0.5, 'y');
     
+    // now create the pincher
+    // left pincher upper
+    // it's centered at -1,1,-.5
+    // and oriented in x
+    // making the endpoints -0.5,1,-0.5, and -1.5,1,-0.5
+    CreateCylinder(9, -1., 1.+verticalOffset, -.5, .1, 0.5, 'x');
+    // right pincher upper
+    CreateCylinder(10, -.5, 1.+verticalOffset, -1., .1, 0.5, 'z');
+    // left pincher forearm
+    CreateCylinder(11, -1.5, 1.+verticalOffset, -.95, .1, 0.4, 'z');
+    // right pincher forearm
+    CreateCylinder(12, -.95, 1.+verticalOffset, -1.5, .1, 0.4, 'x');
+
+    
     // trying to get these offsets right....not so easy!
     
     offsets[0] = 0;
@@ -295,6 +312,26 @@ void RagdollDemo::initPhysics()
     offsets[5] = 0;
     offsets[6] = 0;
     offsets[7] = 0;
+    // what I think these should be:
+//    offsets[8] = -45;
+//    offsets[9] = 45;
+//    offsets[10] = 45;
+//    offsets[11] = -45;
+    // what seems to work better...
+    offsets[8] = 0;
+    offsets[9] = 0;
+    offsets[10] = 0;
+    offsets[11] = 0;
+//    offsets[8] = -90;
+//    offsets[9] = 90;
+//    offsets[10] = 90;
+//    offsets[11] = -90;
+//    offsets[8] = 90;
+//    offsets[9] = -90;
+//    offsets[10] = -90;
+//    offsets[11] = 90;
+    
+
     
     // left leg knee
     CreateHinge(0,1,3,1.5,1.+verticalOffset,0.0,0,0,-1,(-45.+offsets[0])*3.14159/180., (45.+offsets[0])*3.14159/180.);
@@ -313,6 +350,16 @@ void RagdollDemo::initPhysics()
     CreateHinge(6,0,5,0.,1.+verticalOffset,0.5,1,0,0,(-45.+offsets[6])*3.14159/180., (45.+offsets[6])*3.14159/180.);
     // close leg body
     CreateHinge(7,0,6,0.,1.+verticalOffset,-0.5,-1,0,0,(-45.+offsets[7])*3.14159/180., (45.+offsets[7])*3.14159/180.);
+    
+    // body hinges for the pinchers
+    CreateHinge(8,0,9,-0.5,1.+verticalOffset,-0.5,0,1,0,(-45.+offsets[8])*3.14159/180., (45.+offsets[8])*3.14159/180.);
+    // close leg body
+    CreateHinge(9,0,10,-0.5,1.+verticalOffset,-0.5,0,1,0,(-45.+offsets[9])*3.14159/180., (45.+offsets[9])*3.14159/180.);
+    
+    // body hinges for the pinchers
+    CreateHinge(10,9,11,-1.5,1.+verticalOffset,-0.5,0,1,0,(-45.+offsets[8])*3.14159/180., (45.+offsets[8])*3.14159/180.);
+    // close leg body
+    CreateHinge(11,10,12,-0.5,1.+verticalOffset,-1.5,0,1,0,(-45.+offsets[9])*3.14159/180., (45.+offsets[9])*3.14159/180.);
     
     // pause = !pause;
     clientResetScene();
@@ -350,7 +397,7 @@ void RagdollDemo::clientMove()
         if (!pause || (pause && oneStep)) {
             
             // set touches vector to zero
-            for (int i=0; i<10; i++) {
+            for (int i=0; i<14; i++) {
                 touches[i] = 0;
             }
             
@@ -360,10 +407,10 @@ void RagdollDemo::clientMove()
             
             // I seem to be able to update every timestep
             if ( timeStep%1==0 ) {
-                for (int i=0; i<8; i++) {
+                for (int i=0; i<12; i++) {
                     double motorCommand = 0.0;
                     
-                    for (int j=0; j<4; j++) {
+                    for (int j=0; j<6; j++) {
                         motorCommand = motorCommand + weights[j][i]*touches[bodyLookup[j]];
                     }
                     
@@ -371,10 +418,22 @@ void RagdollDemo::clientMove()
                     motorCommand = motorCommand*45;
                     
                     ActuateJoint2(i, motorCommand, 0.1);
-                    
-                    if ( streamOutput ) {
-                        fprintf(stdout,"%d,%f\n",i,motorCommand);
+                }
+                if ( streamOutput ) {
+                    // take the final two nuerons
+                    // and stream them out
+                    int i = 12;
+                    double output = 0.0;
+                    for (int j=0; j<6; j++) {
+                        output = output + weights[j][i]*touches[bodyLookup[j]];
                     }
+                    fprintf(stdout,"%f",output);
+                    i = 13;
+                    output = 0.0;
+                    for (int j=0; j<6; j++) {
+                        output = output + weights[j][i]*touches[bodyLookup[j]];
+                    }
+                    fprintf(stdout,",%f\n",output);
                 }
             }
             timeStep++;
@@ -382,7 +441,10 @@ void RagdollDemo::clientMove()
     }
     
     if ( timeStepExit==1000 ) {
-        Save_Position(body[0]);
+        // only save the position if we care about that...
+        if ( !streamOutput ) {
+            Save_Position(body[0]);
+        }
         exit(0);
     }
 }
