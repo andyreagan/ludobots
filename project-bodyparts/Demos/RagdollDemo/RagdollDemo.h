@@ -46,9 +46,9 @@ class RagdollDemo : public GlutDemoApplication
 
 	btDefaultCollisionConfiguration* m_collisionConfiguration;
     
-    btRigidBody* body[13]; // one main body, 4x2 leg segments, and 4 arm pieces
+    btRigidBody* body[14]; // one main body, 4x2 leg segments, and 4 arm pieces
     
-    btCollisionShape* geom[13];
+    btCollisionShape* geom[14];
     
     btHingeConstraint* joints[12];
     
@@ -82,7 +82,7 @@ class RagdollDemo : public GlutDemoApplication
 //    int bodyCollidesWith = COL_BODY;
 //    int landCollidesWith = COL_LAND;
     
-    int IDs[14];
+    int IDs[15];
     
 public:
     
@@ -98,10 +98,12 @@ public:
     
     bool pause = false;
     
-    int touches[14];
+    int touches[15];
     
-    btVector3 touchPoints[14];
+    btVector3 touchPoints[15];
     
+    double objectGeom;
+
 	void initPhysics();
 
 	void exitPhysics();

@@ -26,9 +26,6 @@ int main(int argc,char* argv[])
 {
     RagdollDemo demoApp;
     
-    demoApp.initPhysics();
-    demoApp.getDynamicsWorld()->setDebugDrawer(&gDebugDrawer);
-    
     // number of input arguments:
     // printf("argc = %d\n\n",argc);
 
@@ -44,6 +41,8 @@ int main(int argc,char* argv[])
     std::string dash = "--";
     std::string input;
     
+    demoApp.objectGeom = -1.0;
+    
     for (int i=0; i<argc; i++) {
         // check the count
         // fprintf(stdout,"i = %d\n",i);
@@ -57,10 +56,15 @@ int main(int argc,char* argv[])
             if (input.substr(2) == "headless") {
                 headless = true;
             }
+            if (input.substr(2) == "objectGeom") {
+                i++;
+                demoApp.objectGeom = atof(argv[i]);
+            }
             if (input.substr(2) == "pause") {
                 demoApp.pause = true;
             }
             if (input.substr(2) == "streamoutput") {
+                printf("streaming output");
                 demoApp.streamOutput = true;
             }
             if (input.substr(2) == "synapses") {
@@ -92,7 +96,11 @@ int main(int argc,char* argv[])
         }
     }
     
+    demoApp.initPhysics();
+    demoApp.getDynamicsWorld()->setDebugDrawer(&gDebugDrawer);
+    
     if ( !synapsesLoaded ) {
+        std::cout << "loading synapses from file" << "\n";
         demoApp.loadSynapsesFromFile();
     }
     

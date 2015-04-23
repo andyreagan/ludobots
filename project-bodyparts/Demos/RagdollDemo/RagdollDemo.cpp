@@ -137,14 +137,14 @@ bool myContactProcessedCallback(btManifoldPoint& cp,
     int *ID1, *ID2;
     btCollisionObject* o1 = static_cast<btCollisionObject*>(body0);
     btCollisionObject* o2 = static_cast<btCollisionObject*>(body1);
-    int groundID = 9;
+    // int groundID = 9;
     
     ID1 = static_cast<int*>(o1->getUserPointer());
     ID2 = static_cast<int*>(o2->getUserPointer());
     
     /* Your code will go here. See the next step. */
     
-    // printf("ID1 = %d, ID2 = %d\n", *ID1, *ID2);
+    printf("ID1 = %d, ID2 = %d\n", *ID1, *ID2);
     
     ragdollDemo->touches[*ID1] = 1;
     ragdollDemo->touches[*ID2] = 1;
@@ -158,12 +158,12 @@ bool myContactProcessedCallback(btManifoldPoint& cp,
 void RagdollDemo::loadSynapsesFromFile() {
     
     FILE *ifp;
-    char *mode = "r";
+    char mode = 'r';
     
-    ifp = fopen("/Users/andyreagan/class/2015/CSYS295evolutionary-robotics/core10/weights.csv", mode);
+    ifp = fopen("/Users/andyreagan/class/2015/CSYS295evolutionary-robotics/final/weights.csv", &mode);
     
     if (ifp == NULL) {
-        fprintf(stderr, "Can't open input file /Users/andyreagan/class/2015/CSYS295evolutionary-robotics/core10/weights.csv!\n");
+        fprintf(stderr, "Can't open input file /Users/andyreagan/class/2015/CSYS295evolutionary-robotics/final/weights.csv!\n");
         exit(1);
     }
     
@@ -175,9 +175,15 @@ void RagdollDemo::loadSynapsesFromFile() {
     double w6;
     double w7;
     double w8;
+    double w9;
+    double w10;
+    double w11;
+    double w12;
+    double w13;
+    double w14;
     int lines = 0;
     
-    while (fscanf(ifp, "%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf\n",&w1,&w2,&w3,&w4,&w5,&w6,&w7,&w8) != EOF) {
+    while (fscanf(ifp, "%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf\n",&w1,&w2,&w3,&w4,&w5,&w6,&w7,&w8,&w9,&w10,&w11,&w12,&w13,&w14) != EOF) {
         // printf("%f,%f,%f,%f,%f,%f,%f,%f\n",w1,w2,w3,w4,w5,w6,w7,w8);
         weights[lines][0] = w1;
         weights[lines][1] = w2;
@@ -187,6 +193,12 @@ void RagdollDemo::loadSynapsesFromFile() {
         weights[lines][5] = w6;
         weights[lines][6] = w7;
         weights[lines][7] = w8;
+        weights[lines][8] = w9;
+        weights[lines][9] = w10;
+        weights[lines][10] = w11;
+        weights[lines][11] = w12;
+        weights[lines][12] = w13;
+        weights[lines][13] = w14;
         lines++;
     }
     
@@ -200,11 +212,9 @@ void RagdollDemo::initPhysics()
     ragdollDemo = this;
     gContactProcessedCallback = myContactProcessedCallback;
     
-    for (int i=0; i<14; i++) {
+    for (int i=0; i<15; i++) {
         touches[i] = 0;
     }
-    
-
     
     bodyLookup[0] = 3;
     bodyLookup[1] = 4;
@@ -258,7 +268,7 @@ void RagdollDemo::initPhysics()
     // startOffset.setValue(-1,0.5,0);
 	// spawnRagdoll(startOffset);
     
-    for (int i=0; i<14; i++) {
+    for (int i=0; i<15; i++) {
         IDs[i] = i;
     }
     
@@ -289,18 +299,40 @@ void RagdollDemo::initPhysics()
     CreateCylinder(8, 0., 0.5+verticalOffset, -1.5, .1, 0.5, 'y');
     
     // now create the pincher
-    // left pincher upper
+    // left pincher upper (from the center of the robot)
     // it's centered at -1,1,-.5
     // and oriented in x
     // making the endpoints -0.5,1,-0.5, and -1.5,1,-0.5
-    CreateCylinder(9, -1., 1.+verticalOffset, -.5, .1, 0.5, 'x');
+    CreateCylinder(9, -1., 1.+verticalOffset, -.4, .1, 0.5, 'x');
     // right pincher upper
-    CreateCylinder(10, -.5, 1.+verticalOffset, -1., .1, 0.5, 'z');
+    CreateCylinder(10, -.4, 1.+verticalOffset, -1., .1, 0.5, 'z');
     // left pincher forearm
-    CreateCylinder(11, -1.5, 1.+verticalOffset, -.95, .1, 0.4, 'z');
+    CreateCylinder(11, -1.5, 1.+verticalOffset, -.55, .1, 0.2, 'z');
     // right pincher forearm
-    CreateCylinder(12, -.95, 1.+verticalOffset, -1.5, .1, 0.4, 'x');
-
+    CreateCylinder(12, -.55, 1.+verticalOffset, -1.5, .1, 0.2, 'x');
+    
+    // use the objectGeom number (between 0 and 1) to create a spheroid
+    // CreateCapsule(objectGeom);
+    int newObjectIndex = 13;
+    btVector3 localInertia(0.,0.,0.);
+    btTransform offset; offset.setIdentity();
+    offset.setOrigin(btVector3(btScalar(-1.5), btScalar(0.75), btScalar(-1.5)));
+    // offset.setOrigin(btVector3(btScalar(-1.5), btScalar(0.75), btScalar(-1.5)));
+    btScalar mass(3.f);
+    btDefaultMotionState* myMotionState = new btDefaultMotionState(offset);
+    btCollisionShape* colShape;
+    if (objectGeom > 0) {
+        colShape = new btSphereShape(0.75);
+    }
+    else {
+        colShape = new btBoxShape(btVector3(btScalar(0.75),btScalar(0.75),btScalar(0.75)));
+    }
+    colShape->calculateLocalInertia(mass,localInertia);
+    btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,colShape,localInertia);
+    body[13] = new btRigidBody(rbInfo);
+    m_dynamicsWorld->addRigidBody(body[13]);
+    // newObject->setUserPointer( &newObjectIndex );
+    (body[13])->setUserPointer( &(IDs[13]) );
     
     // trying to get these offsets right....not so easy!
     
@@ -352,16 +384,14 @@ void RagdollDemo::initPhysics()
     CreateHinge(7,0,6,0.,1.+verticalOffset,-0.5,-1,0,0,(-45.+offsets[7])*3.14159/180., (45.+offsets[7])*3.14159/180.);
     
     // body hinges for the pinchers
-    CreateHinge(8,0,9,-0.5,1.+verticalOffset,-0.5,0,1,0,(-45.+offsets[8])*3.14159/180., (45.+offsets[8])*3.14159/180.);
-    // close leg body
-    CreateHinge(9,0,10,-0.5,1.+verticalOffset,-0.5,0,1,0,(-45.+offsets[9])*3.14159/180., (45.+offsets[9])*3.14159/180.);
+    CreateHinge(8,0,9,-0.5,1.+verticalOffset,-0.4,0,1,0,(-45.+offsets[8])*3.14159/180., (45.+offsets[8])*3.14159/180.);
+    CreateHinge(9,0,10,-0.4,1.+verticalOffset,-0.5,0,-1,0,(-45.+offsets[9])*3.14159/180., (45.+offsets[9])*3.14159/180.);
     
-    // body hinges for the pinchers
-    CreateHinge(10,9,11,-1.5,1.+verticalOffset,-0.5,0,1,0,(-45.+offsets[8])*3.14159/180., (45.+offsets[8])*3.14159/180.);
-    // close leg body
-    CreateHinge(11,10,12,-0.5,1.+verticalOffset,-1.5,0,1,0,(-45.+offsets[9])*3.14159/180., (45.+offsets[9])*3.14159/180.);
+    // elbow hinges for the pinchers
+    CreateHinge(10,9,11,-1.5,1.+verticalOffset,-0.4,0,1,0,(-45.+offsets[10])*3.14159/180., (45.+offsets[10])*3.14159/180.);
+    CreateHinge(11,10,12,-0.4,1.+verticalOffset,-1.5,0,-1,0,(-45.+offsets[11])*3.14159/180., (45.+offsets[11])*3.14159/180.);
     
-    // pause = !pause;
+    pause = !pause;
     clientResetScene();
 }
 
@@ -420,6 +450,7 @@ void RagdollDemo::clientMove()
                     ActuateJoint2(i, motorCommand, 0.1);
                 }
                 if ( streamOutput ) {
+                    // fprintf(stdout,"streaming output");
                     // take the final two nuerons
                     // and stream them out
                     int i = 12;
@@ -440,7 +471,7 @@ void RagdollDemo::clientMove()
         }
     }
     
-    if ( timeStepExit==1000 ) {
+    if ( timeStepExit==10000 ) {
         // only save the position if we care about that...
         if ( !streamOutput ) {
             Save_Position(body[0]);
@@ -581,10 +612,7 @@ void RagdollDemo::CreateHinge(int index, int body1, int body2,
     joints[index] = new btHingeConstraint(*body[body1], *body[body2],
                                           p1, p2,
                                           a1, a2, false);
-    if (index < 8)
-    {
-        joints[index]->setLimit(theta1,theta2);
-    }
+    joints[index]->setLimit(theta1,theta2);
     m_dynamicsWorld->addConstraint( joints[index] , true);
 }
 
@@ -601,7 +629,7 @@ void RagdollDemo::ActuateJoint2(int jointIndex, double desiredAngle,
 {
     double currentAngle;
     currentAngle = joints[jointIndex]->getHingeAngle();
-    double maxImpulse = 2.0;
+    double maxImpulse = 0.2;
     double diff;
     diff = desiredAngle-(currentAngle+offsets[jointIndex]);
     joints[jointIndex]->enableAngularMotor(true, 20*diff, maxImpulse);
