@@ -8,6 +8,16 @@ import time
 import numpy as np
 import subprocess
 
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+import datetime
+def mysavefig(name,date=True):
+    if date:
+        plt.savefig('{0}-{1}'.format(datetime.datetime.strftime(datetime.datetime.now(),'%Y-%m-%d-%H-%M'),name))
+    else:
+        plt.savefig('{1}'.format(name))
+
 def MatrixCreate(down,across):
     return np.zeros([down,across])
 
@@ -150,11 +160,71 @@ if __name__ == '__main__':
     synapseWeights = np.random.uniform(low=-1.0,high=1.0,size=[numInputs,numMotors])
 
     # test the runBullet guy
-    result = runBulletStdin(synapseWeights)
-    print(result.shape)
+    result1 = runBulletStdin(synapseWeights)
+    print(result1.shape)
 
-    goal = np.array([0])
+    # test it with the other shape
+    result2 = runBulletStdin(np.random.uniform(low=-1.0,high=1.0,size=[numInputs,numMotors]))
+    print(result2.shape)
+
+    # now compute the bounding boxes, and their overlap
+    bbox1 = np.array([result1.min(axis=(0)),result1.max(axis=(0))]).flatten()
+    bbox2 = np.array([result2.min(axis=(0)),result2.max(axis=(0))]).flatten()
+    print(bbox1)
+    print(bbox2)
+    # of the form [x1 y1 x2 y2]
+    print('bbox1 area: {0}'.format((bbox1[2]-bbox1[0])*(bbox1[3]-bbox1[1])))
+    print('bbox2 area: {0}'.format((bbox2[2]-bbox2[0])*(bbox2[3]-bbox2[1])))
+
+    def overlap(line1,line2):
+        # take the smaller line, and try to place it
+        # on top of the bigger line
+        len1 = line1[1]-line1[0]
+        len2 = line2[1]-line2[0]
+        if len1 > len2:
+            longerline = line1
+            shorterline = line2
+        else:
+            longerline = line2
+            shorterline = line1
+        # there are three cases
+        # overlap on the bottom
+        if shorterline[1] > longerline[0] and shorterline[0] < longerline[0]:
+            print('overlap on the bottom')
+            return shorterline[1]-longerline[0]
+        # fully overlapping
+        elif shorterline[1] < longerline[1] and shorterline[0] > longerline[0]:
+            print('fully overlapping')
+            return shorterline[1]-shorterline[0]
+        # overlap on the top
+        elif shorterline[1] > longerline[1] and shorterline[0] > longerline[0]:
+            print('overlap on the top')
+            return longerline[1]-shorterline[0]
+        else:
+            return 0
+
+    overlapy = overlap([bbox1[1],bbox1[3]],[bbox2[1],bbox2[3]])
+    print('overlap in y: {0}'.format(overlapy))
+    overlapx = overlap([bbox1[0],bbox1[2]],[bbox2[0],bbox2[2]])
+    print('overlap in x: {0}'.format(overlapx))
+    bboxoverlap = overlapx*overlapy
+    print('bbox overlap area: {0}'.format(bboxoverlap))
+
+    # fig = plt.figure(figsize=(10,10))
+    # ax = fig.add_axes([0.2,0.2,0.7,0.7])
+    # # plt.xkcd()
+    # ax.plot(result1[:,0],result1[:,1],'b')
+    # ax.plot(result2[:,0],result2[:,1],'r')
+    # ax.add_patch(Rectangle(bbox1[0:2],bbox1[2]-bbox1[0],bbox1[3]-bbox1[1],color=[0.1,0.1,0.1,0.5]))
+    # ax.add_patch(Rectangle(bbox2[0:2],bbox2[2]-bbox2[0],bbox2[3]-bbox2[1],color=[0.1,0.1,0.1,0.5]))
+    # mysavefig('initial-bbox-test.png')
+    # plt.show()
+
+    # overlap = bbox
+    
+    # goal = np.array([0])
     # fit,genes = Evolve(synapseWeights,evoTime,runBullet,maxDistanceFitness,goal,[-1,1])
+
 
 
 
