@@ -64,7 +64,7 @@ int main(int argc,char* argv[])
                 demoApp.pause = true;
             }
             if (input.substr(2) == "streamoutput") {
-                printf("streaming output");
+                // printf("streaming output");
                 demoApp.streamOutput = true;
             }
             if (input.substr(2) == "synapses") {

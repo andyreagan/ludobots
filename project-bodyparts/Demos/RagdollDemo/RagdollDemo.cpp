@@ -144,7 +144,7 @@ bool myContactProcessedCallback(btManifoldPoint& cp,
     
     /* Your code will go here. See the next step. */
     
-    printf("ID1 = %d, ID2 = %d\n", *ID1, *ID2);
+    // printf("ID1 = %d, ID2 = %d\n", *ID1, *ID2);
     
     ragdollDemo->touches[*ID1] = 1;
     ragdollDemo->touches[*ID2] = 1;
@@ -391,7 +391,7 @@ void RagdollDemo::initPhysics()
     CreateHinge(10,9,11,-1.5,1.+verticalOffset,-0.4,0,1,0,(-45.+offsets[10])*3.14159/180., (45.+offsets[10])*3.14159/180.);
     CreateHinge(11,10,12,-0.4,1.+verticalOffset,-1.5,0,-1,0,(-45.+offsets[11])*3.14159/180., (45.+offsets[11])*3.14159/180.);
     
-    pause = !pause;
+    // pause = !pause;
     clientResetScene();
 }
 
@@ -471,7 +471,7 @@ void RagdollDemo::clientMove()
         }
     }
     
-    if ( timeStepExit==10000 ) {
+    if ( timeStepExit==150 ) {
         // only save the position if we care about that...
         if ( !streamOutput ) {
             Save_Position(body[0]);
