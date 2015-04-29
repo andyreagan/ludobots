@@ -82,9 +82,11 @@ class RagdollDemo : public GlutDemoApplication
 //    int bodyCollidesWith = COL_BODY;
 //    int landCollidesWith = COL_LAND;
     
-    int IDs[15];
+    
     
 public:
+    
+    int IDs[15];
     
     // make public so I can fill from stdin
     double weights[6][14];

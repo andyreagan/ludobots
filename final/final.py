@@ -52,7 +52,7 @@ def Evolve(parent,runtime,testFun,fitnessFun,match,prange):
         childperf = testFun(child)
         childFitness = fitnessFun(childperf,match)
 
-        print('{0}\t{1}\t{2}'.format(currentGeneration,perf,childperf))
+        # print('{0}\t{1}\t{2}'.format(currentGeneration,perf,childperf))
         # print('{0}\t{1}\t{2}\t{3}\t{4}\n'.format(currentGeneration,perf,childperf,parentFitness,childFitness))
 
         # if we accept the child as the new parent
@@ -129,10 +129,11 @@ def runBullet(parent):
 
 # this function will interface with the executable
 # given a set of synapse weights
-def runBulletStdin(parent):
+def runBulletStdin(parent,objectGeom=1):
     command = './robot --headless'
-    command = './robot --headless --objectGeom 1 --streamoutput --synapses {0}'.format(' '.join(map(str,parent.flat)))
-    print(command)
+    command = './robot --headless --objectGeom {1} --streamoutput --synapses {0}'.format(' '.join(map(str,parent.flat)),objectGeom)
+    # command = './robot --objectGeom {1} --streamoutput --synapses {0}'.format(' '.join(map(str,parent.flat)),objectGeom)
+    # print(command)
     # os.system(command)
     # proc = subprocess.Popen(command,shell=True,stderr=subprocess.PIPE,stdout=subprocess.PIPE)
     proc = subprocess.Popen(command.split(" "),shell=False,stderr=subprocess.PIPE,stdout=subprocess.PIPE)
@@ -156,25 +157,25 @@ if __name__ == '__main__':
     evoTime = 500
 
     numInputs = 6
-    numMotors = 14
-    synapseWeights = np.random.uniform(low=-1.0,high=1.0,size=[numInputs,numMotors])
+    numOutputs = 14
+    synapseWeights = np.random.uniform(low=-1.0,high=1.0,size=[numInputs,numOutputs])
 
-    # test the runBullet guy
-    result1 = runBulletStdin(synapseWeights)
-    print(result1.shape)
+    # # test the runBullet guy
+    # result1 = runBulletStdin(synapseWeights)
+    # print(result1.shape)
 
-    # test it with the other shape
-    result2 = runBulletStdin(np.random.uniform(low=-1.0,high=1.0,size=[numInputs,numMotors]))
-    print(result2.shape)
+    # # test it with the other shape
+    # result2 = runBulletStdin(np.random.uniform(low=-1.0,high=1.0,size=[numInputs,numOutputs]))
+    # print(result2.shape)
 
-    # now compute the bounding boxes, and their overlap
-    bbox1 = np.array([result1.min(axis=(0)),result1.max(axis=(0))]).flatten()
-    bbox2 = np.array([result2.min(axis=(0)),result2.max(axis=(0))]).flatten()
-    print(bbox1)
-    print(bbox2)
-    # of the form [x1 y1 x2 y2]
-    print('bbox1 area: {0}'.format((bbox1[2]-bbox1[0])*(bbox1[3]-bbox1[1])))
-    print('bbox2 area: {0}'.format((bbox2[2]-bbox2[0])*(bbox2[3]-bbox2[1])))
+    # # now compute the bounding boxes, and their overlap
+    # bbox1 = np.array([result1.min(axis=(0)),result1.max(axis=(0))]).flatten()
+    # bbox2 = np.array([result2.min(axis=(0)),result2.max(axis=(0))]).flatten()
+    # print(bbox1)
+    # print(bbox2)
+    # # of the form [x1 y1 x2 y2]
+    # print('bbox1 area: {0}'.format((bbox1[2]-bbox1[0])*(bbox1[3]-bbox1[1])))
+    # print('bbox2 area: {0}'.format((bbox2[2]-bbox2[0])*(bbox2[3]-bbox2[1])))
 
     def overlap(line1,line2):
         # take the smaller line, and try to place it
@@ -190,25 +191,25 @@ if __name__ == '__main__':
         # there are three cases
         # overlap on the bottom
         if shorterline[1] > longerline[0] and shorterline[0] < longerline[0]:
-            print('overlap on the bottom')
+            # print('overlap on the bottom')
             return shorterline[1]-longerline[0]
         # fully overlapping
         elif shorterline[1] < longerline[1] and shorterline[0] > longerline[0]:
-            print('fully overlapping')
+            # print('fully overlapping')
             return shorterline[1]-shorterline[0]
         # overlap on the top
         elif shorterline[1] > longerline[1] and shorterline[0] > longerline[0]:
-            print('overlap on the top')
+            # print('overlap on the top')
             return longerline[1]-shorterline[0]
         else:
             return 0
 
-    overlapy = overlap([bbox1[1],bbox1[3]],[bbox2[1],bbox2[3]])
-    print('overlap in y: {0}'.format(overlapy))
-    overlapx = overlap([bbox1[0],bbox1[2]],[bbox2[0],bbox2[2]])
-    print('overlap in x: {0}'.format(overlapx))
-    bboxoverlap = overlapx*overlapy
-    print('bbox overlap area: {0}'.format(bboxoverlap))
+    # overlapy = overlap([bbox1[1],bbox1[3]],[bbox2[1],bbox2[3]])
+    # print('overlap in y: {0}'.format(overlapy))
+    # overlapx = overlap([bbox1[0],bbox1[2]],[bbox2[0],bbox2[2]])
+    # print('overlap in x: {0}'.format(overlapx))
+    # bboxoverlap = overlapx*overlapy
+    # print('bbox overlap area: {0}'.format(bboxoverlap))
 
     # fig = plt.figure(figsize=(10,10))
     # ax = fig.add_axes([0.2,0.2,0.7,0.7])
@@ -220,10 +221,50 @@ if __name__ == '__main__':
     # mysavefig('initial-bbox-test.png')
     # plt.show()
 
-    # overlap = bbox
-    
+    def computeOverlap(result1,result2):
+        # now compute the bounding boxes, and their overlap
+        bbox1 = np.array([result1.min(axis=(0)),result1.max(axis=(0))]).flatten()
+        bbox2 = np.array([result2.min(axis=(0)),result2.max(axis=(0))]).flatten()
+
+        # print(bbox1)
+        # print(bbox2)
+        # # of the form [x1 y1 x2 y2]
+        # print('bbox1 area: {0}'.format((bbox1[2]-bbox1[0])*(bbox1[3]-bbox1[1])))
+        # print('bbox2 area: {0}'.format((bbox2[2]-bbox2[0])*(bbox2[3]-bbox2[1])))
+
+        overlapy = overlap([bbox1[1],bbox1[3]],[bbox2[1],bbox2[3]])
+        # print('overlap in y: {0}'.format(overlapy))
+
+        overlapx = overlap([bbox1[0],bbox1[2]],[bbox2[0],bbox2[2]])
+        # print('overlap in x: {0}'.format(overlapx))
+
+        bboxoverlap = overlapx*overlapy
+        print('bbox overlap area: {0}'.format(bboxoverlap))
+
+        return bboxoverlap
+
     # goal = np.array([0])
     # fit,genes = Evolve(synapseWeights,evoTime,runBullet,maxDistanceFitness,goal,[-1,1])
+    goal = np.array([0])
+
+    def separateBBoxTestFun(synapses):
+        result1 = runBulletStdin(synapses,objectGeom=1)
+        result2 = runBulletStdin(synapses,objectGeom=0)
+        a = computeOverlap(result1,result2)
+        # print(a)
+        return a
+
+    def minOverlapFitness(attempt,goal):
+        return -attempt
+
+    fit,genes = Evolve(synapseWeights,evoTime,separateBBoxTestFun,minOverlapFitness,goal,[-1,1])
+    print(genes)
+    plt.plot(range(evoTime),fit)
+    plt.xlabel('generation')
+    plt.ylabel('fitness')
+    plt.title('fitness curve for armed quadraped')
+    plt.savefig('first-attempt')
+    plt.show()
 
 
 

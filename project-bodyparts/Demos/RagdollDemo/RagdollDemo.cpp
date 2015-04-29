@@ -142,12 +142,12 @@ bool myContactProcessedCallback(btManifoldPoint& cp,
     ID1 = static_cast<int*>(o1->getUserPointer());
     ID2 = static_cast<int*>(o2->getUserPointer());
     
-    /* Your code will go here. See the next step. */
+    // Your code will go here. See the next step.
     
     // printf("ID1 = %d, ID2 = %d\n", *ID1, *ID2);
     
-    ragdollDemo->touches[*ID1] = 1;
-    ragdollDemo->touches[*ID2] = 1;
+    ragdollDemo->touches[*ID1] = ragdollDemo->IDs[*ID2];
+    ragdollDemo->touches[*ID2] = ragdollDemo->IDs[*ID1];
     
     ragdollDemo->touchPoints[*ID1] = cp.m_positionWorldOnB;
     ragdollDemo->touchPoints[*ID2] = cp.m_positionWorldOnB;
@@ -259,7 +259,7 @@ void RagdollDemo::initPhysics()
 		fixedGround->setWorldTransform(groundTransform);
         // m_dynamicsWorld->addCollisionObject(fixedGround, COL_POWERUP, powerupCollidesWith);
         m_dynamicsWorld->addCollisionObject(fixedGround);
-        (fixedGround)->setUserPointer( &(IDs[9]) );
+        (fixedGround)->setUserPointer( &(IDs[14]) );
 	}
 
 	// Spawn one ragdoll
@@ -329,10 +329,10 @@ void RagdollDemo::initPhysics()
     }
     colShape->calculateLocalInertia(mass,localInertia);
     btRigidBody::btRigidBodyConstructionInfo rbInfo(mass,myMotionState,colShape,localInertia);
-    body[13] = new btRigidBody(rbInfo);
-    m_dynamicsWorld->addRigidBody(body[13]);
+    body[newObjectIndex] = new btRigidBody(rbInfo);
+    m_dynamicsWorld->addRigidBody(body[newObjectIndex]);
     // newObject->setUserPointer( &newObjectIndex );
-    (body[13])->setUserPointer( &(IDs[13]) );
+    (body[newObjectIndex])->setUserPointer( &(IDs[newObjectIndex]) );
     
     // trying to get these offsets right....not so easy!
     
@@ -426,11 +426,14 @@ void RagdollDemo::clientMove()
     {
         if (!pause || (pause && oneStep)) {
             
+            // body, upper, upper, lower, lower, upper, upper, lower, lower, inner, inner, outer, outer, box, ground
             // set touches vector to zero
             for (int i=0; i<14; i++) {
+                // fprintf(stdout,"%d,",touches[i]);
                 touches[i] = 0;
             }
-            
+            // fprintf(stdout,"%d\n",touches[14]);
+            touches[14] = 0;
             m_dynamicsWorld->stepSimulation(0.1);
             
             oneStep = !oneStep;
@@ -450,6 +453,7 @@ void RagdollDemo::clientMove()
                     ActuateJoint2(i, motorCommand, 0.1);
                 }
                 if ( streamOutput ) {
+                    fprintf(stdout,"%d,%d,",touches[11],touches[12]);
                     // fprintf(stdout,"streaming output");
                     // take the final two nuerons
                     // and stream them out
@@ -458,20 +462,20 @@ void RagdollDemo::clientMove()
                     for (int j=0; j<6; j++) {
                         output = output + weights[j][i]*touches[bodyLookup[j]];
                     }
-                    fprintf(stdout,"%f",output);
+                    fprintf(stdout,"%f,",output);
                     i = 13;
                     output = 0.0;
                     for (int j=0; j<6; j++) {
                         output = output + weights[j][i]*touches[bodyLookup[j]];
                     }
-                    fprintf(stdout,",%f\n",output);
+                    fprintf(stdout,"%f\n",output);
                 }
             }
             timeStep++;
         }
     }
     
-    if ( timeStepExit==150 ) {
+    if ( timeStepExit==20000 ) {
         // only save the position if we care about that...
         if ( !streamOutput ) {
             Save_Position(body[0]);

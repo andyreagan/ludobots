@@ -42,6 +42,7 @@ int main(int argc,char* argv[])
     std::string input;
     
     demoApp.objectGeom = -1.0;
+    // demoApp.streamOutput = true;
     
     for (int i=0; i<argc; i++) {
         // check the count
